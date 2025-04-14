@@ -744,33 +744,35 @@ local snippets = {
     { condition = in_mathzone }
   ),
 
-  s(
-    { trig = "([A-Za-z])(\\d)", regTrig = true, wordTrig = true, dscr = "auto subscript", snippetType = "autosnippet" },
-    {
-      f(function(_, snip) return snip.captures[1] end),
-      t("_"),
-      f(function(_, snip) return snip.captures[2] end)
-    },
-    { condition = in_mathzone }
-  ),
-
-  s(
-    {
-      trig = "([A-Za-z])_(\\d\\d)",
+  s({
+      trig = "(%a)(%d)",
       regTrig = true,
-      wordTrig = true,
-      dscr = "auto subscript2",
-      snippetType =
-      "autosnippet"
+      snippetType = "autosnippet",
     },
     {
-      f(function(_, snip) return snip.captures[1] end),
-      t("_{"),
-      f(function(_, snip) return snip.captures[2] end),
-      t("}")
+      f(function(_, snip)
+        local letter = snip.captures[1]
+        local number = snip.captures[2]
+        return string.format("%s_%s", letter, number)
+      end)
+    }, { condition = in_mathzone }),
+
+  -- Second snippet: single letter followed by 2 digits
+  s({
+
+      trig = "(%a)_(%d%d)", -- Letter followed by 2
+      regTrig = true,
+      snippetType = "autosnippet",
     },
-    { condition = in_mathzone }
-  ),
+    {
+      f(function(_, snip)
+        local letter = snip.captures[1]
+
+        local number = snip.captures[2]
+
+        return string.format("%s_{%s}", letter, number)
+      end)
+    }, { condition = in_mathzone }),
 
   s(
     { trig = "([1-9])([1-9])(bm|pm|m|vm)at", regTrig = true, dscr = "matrix", snippetType = "autosnippet" },
@@ -1021,10 +1023,10 @@ local snippets = {
   s({ trig = "cong", dscr = "\\cong", snippetType = "autosnippet" }, { t("\\cong") }, { condition = in_mathzone }),
 
   -- Additional math utility snippets
-  s({ trig = "pf", dscr = "^2", snippetType = "autosnippet" }, { t("^2") }, { condition = in_mathzone }),
-  s({ trig = "lf", dscr = "^3", snippetType = "autosnippet" }, { t("^3") }, { condition = in_mathzone }),
+  s({ trig = "pf", wordTrig = false, dscr = "^2", snippetType = "autosnippet" }, { t("^2") }, { condition = in_mathzone }),
+  s({ trig = "lf", wordTrig = false, dscr = "^3", snippetType = "autosnippet" }, { t("^3") }, { condition = in_mathzone }),
   s(
-    { trig = "**", dscr = "superscript", snippetType = "autosnippet" },
+    { trig = "**", wordTrig = false, dscr = "superscript", snippetType = "autosnippet" },
     {
       t("^{"),
       i(1),
@@ -1083,7 +1085,7 @@ local snippets = {
     }
   ),
   s(
-    { trig = "__", dscr = "subscript", snippetType = "autosnippet" },
+    { trig = "__", wordTrig = false, dscr = "subscript", snippetType = "autosnippet" },
     {
       t("_{"),
       i(1),
@@ -1094,7 +1096,7 @@ local snippets = {
   ),
 
   s(
-    { trig = "~~", dscr = "~", snippetType = "autosnippet" },
+    { trig = "~~", wordTrig = false, dscr = "~", snippetType = "autosnippet" },
     {
       t("\\sim ")
     },
@@ -1102,7 +1104,7 @@ local snippets = {
   ),
 
   s(
-    { trig = "||", dscr = "mid", snippetType = "autosnippet" },
+    { trig = "||", wordTrig = false, dscr = "mid", snippetType = "autosnippet" },
     {
       t(" \\mid ")
     },

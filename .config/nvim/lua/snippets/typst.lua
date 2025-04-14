@@ -11,8 +11,34 @@ local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 local conds = require("luasnip.extras.expand_conditions")
 
+local function in_typst_math()
+  local ok, parsers = pcall(require, "nvim-treesitter.parsers")
+  if not ok then return false end
+
+  -- Check if typst parser is available
+
+  if not parsers.has_parser("typst") then return false end
+
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+  if not node then return false end
+
+  -- Walk up the tree to find math environments
+  while node do
+    local type = node:type()
+    if type == "math" or type == "math_inline" or type == "math_display" or
+        type == "inline_math" or type == "display_math" then
+      return true
+    end
+    node = node:parent()
+  end
+
+
+  return false
+end
+
 local typst_snippets = {
-  s({ trig = "mk", dscr = "inline math" }, { t('$'), i(0), t('$') }),
+  s({ trig = "mk", dscr = "inline math" }, { t('$'), i(1), t(' $'), i(0) }),
   s({ trig = "dm", dscr = "display math" }, { t('$ '), i(0), t(' $') }),
   -- Greek letters (with autosnippet)
   s({ trig = "@a", dscr = "alpha", snippetType = "autosnippet" }, { t("alpha") }),
@@ -67,19 +93,27 @@ local typst_snippets = {
     t('text("'), i(1), t('")'), i(0)
   }),
 
-  -- Auto subscript (with autosnippet since it had wA in the hsnips file)
-  s({ trig = "([A-Za-z])(\\d)", regTrig = true, dscr = "Auto subscript", snippetType = "autosnippet" }, {
-    f(function(_, snip) return snip.captures[1] end),
-    t("_"),
-    f(function(_, snip) return snip.captures[2] end),
-  }),
+  s({
+      trig = "(%a)(%d)",
+      regTrig = true,
+      snippetType = "autosnippet"
+    },
+    {
+      f(function(_, snip)
+        local letter = snip.captures[1]
+        local number = snip.captures[2]
+        return string.format("%s_%s", letter, number)
+      end, {})
+    },
+    {
+      condition = function() return in_typst_math() end
+    }),
 
-  -- Subscript and superscript (with autosnippet since they had iA in the hsnips file)
-  s({ trig = "__", dscr = "Subscript", snippetType = "autosnippet" }, {
+  s({ trig = "__", wordTrig = false, dscr = "Subscript", snippetType = "autosnippet" }, {
     t("_("), i(1), t(")"), i(0)
   }),
 
-  s({ trig = "**", dscr = "Superscript", snippetType = "autosnippet" }, {
+  s({ trig = "**", wordTrig = false, dscr = "Superscript", snippetType = "autosnippet" }, {
     t("^("), i(1), t(")"), i(0)
   }),
 
