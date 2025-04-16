@@ -85,8 +85,10 @@ local typst_snippets = {
   s({ trig = "@vq", dscr = "vartheta", snippetType = "autosnippet" }, { t("theta.alt") }),
 
   -- Roman letters (with autosnippet)
-  s({ trig = "ee", dscr = "Roman e", snippetType = "autosnippet" }, { t("upright(e)") }),
-  s({ trig = "ii", dscr = "Roman i", snippetType = "autosnippet" }, { t("upright(i)") }),
+  s({ trig = "ee", dscr = "Roman e", snippetType = "autosnippet" }, { t("upright(e)") },
+    { condition = function() return in_typst_math() end }),
+  s({ trig = "ii", dscr = "Roman i", snippetType = "autosnippet" }, { t("upright(i)") },
+    { condition = function() return in_typst_math() end }),
 
   -- Text in math
   s({ trig = "txt", dscr = "Text in math", snippetType = "autosnippet" }, {
