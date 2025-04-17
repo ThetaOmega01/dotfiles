@@ -13,33 +13,43 @@ local conds = require("luasnip.extras.expand_conditions")
 
 local function in_typst_math()
   local ok, parsers = pcall(require, "nvim-treesitter.parsers")
-  if not ok then return false end
+  if not ok then
+    return false
+  end
 
   -- Check if typst parser is available
 
-  if not parsers.has_parser("typst") then return false end
+  if not parsers.has_parser("typst") then
+    return false
+  end
 
   local ts_utils = require("nvim-treesitter.ts_utils")
   local node = ts_utils.get_node_at_cursor()
-  if not node then return false end
+  if not node then
+    return false
+  end
 
   -- Walk up the tree to find math environments
   while node do
     local type = node:type()
-    if type == "math" or type == "math_inline" or type == "math_display" or
-        type == "inline_math" or type == "display_math" then
+    if
+      type == "math"
+      or type == "math_inline"
+      or type == "math_display"
+      or type == "inline_math"
+      or type == "display_math"
+    then
       return true
     end
     node = node:parent()
   end
 
-
   return false
 end
 
 local typst_snippets = {
-  s({ trig = "mk", dscr = "inline math" }, { t('$'), i(1), t(' $'), i(0) }),
-  s({ trig = "dm", dscr = "display math" }, { t('$ '), i(0), t(' $') }),
+  s({ trig = "mk", dscr = "inline math" }, { t("$"), i(1), t(" $"), i(0) }),
+  s({ trig = "dm", dscr = "display math" }, { t("$ "), i(0), t(" $") }),
   -- Greek letters (with autosnippet)
   s({ trig = "@a", dscr = "alpha", snippetType = "autosnippet" }, { t("alpha") }),
   s({ trig = "@b", dscr = "beta", snippetType = "autosnippet" }, { t("beta") }),
@@ -85,117 +95,168 @@ local typst_snippets = {
   s({ trig = "@vq", dscr = "vartheta", snippetType = "autosnippet" }, { t("theta.alt") }),
 
   -- Roman letters (with autosnippet)
-  s({ trig = "ee", dscr = "Roman e", snippetType = "autosnippet" }, { t("upright(e)") },
-    { condition = function() return in_typst_math() end }),
-  s({ trig = "ii", dscr = "Roman i", snippetType = "autosnippet" }, { t("upright(i)") },
-    { condition = function() return in_typst_math() end }),
+  s({ trig = "ee", dscr = "Roman e", snippetType = "autosnippet" }, { t("upright(e)") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "ii", dscr = "Roman i", snippetType = "autosnippet" }, { t("upright(i)") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 
   -- Text in math
   s({ trig = "txt", dscr = "Text in math", snippetType = "autosnippet" }, {
-    t('text("'), i(1), t('")'), i(0)
+    t('text("'),
+    i(1),
+    t('")'),
+    i(0),
   }),
 
   s({
-      trig = "(%a)(%d)",
-      regTrig = true,
-      snippetType = "autosnippet"
-    },
-    {
-      f(function(_, snip)
-        local letter = snip.captures[1]
-        local number = snip.captures[2]
-        return string.format("%s_%s", letter, number)
-      end, {})
-    },
-    {
-      condition = function() return in_typst_math() end
-    }),
+    trig = "(%a)(%d)",
+    regTrig = true,
+    snippetType = "autosnippet",
+  }, {
+    f(function(_, snip)
+      local letter = snip.captures[1]
+      local number = snip.captures[2]
+      return string.format("%s_%s", letter, number)
+    end, {}),
+  }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 
   s({ trig = "__", wordTrig = false, dscr = "Subscript", snippetType = "autosnippet" }, {
-    t("_("), i(1), t(")"), i(0)
+    t("_("),
+    i(1),
+    t(")"),
+    i(0),
   }),
 
   s({ trig = "**", wordTrig = false, dscr = "Superscript", snippetType = "autosnippet" }, {
-    t("^("), i(1), t(")"), i(0)
+    t("^("),
+    i(1),
+    t(")"),
+    i(0),
   }),
 
-  -- Definite integral (with autosnippet since it had iA in the hsnips file)
+  -- Definite integral (with autosnippet)
   s({ trig = "djf", dscr = "Definite integral", snippetType = "autosnippet" }, {
-    t("integral_("), i(1), t(")^("), i(2), t(") "), i(0), t(" dd("), i(3), t(")")
+    t("integral_("),
+    i(1),
+    t(")^("),
+    i(2),
+    t(") "),
+    i(0),
+    t(" dd("),
+    i(3),
+    t(")"),
   }),
 
-  -- Bold characters (with autosnippet since it had iA in the hsnips file)
+  -- Bold characters (with autosnippet)
   s({ trig = "bf([a-zA-Z])", regTrig = true, dscr = "Bold character", snippetType = "autosnippet" }, {
     t("bold("),
-    f(function(_, snip) return snip.captures[1] end),
+    f(function(_, snip)
+      return snip.captures[1]
+    end),
     t(")"),
   }),
 
-  -- Calligraphic characters (with autosnippet since it had iA in the hsnips file)
+  -- Calligraphic characters (with autosnippet)
   s({ trig = "mc([A-Z])", regTrig = true, dscr = "Calligraphic character", snippetType = "autosnippet" }, {
     t("cal("),
-    f(function(_, snip) return snip.captures[1] end),
+    f(function(_, snip)
+      return snip.captures[1]
+    end),
     t(")"),
   }),
 
-  -- Roman characters (with autosnippet since it had iA in the hsnips file)
+  -- Roman characters (with autosnippet)
   s({ trig = "rm([a-zA-Z])", regTrig = true, dscr = "Roman character", snippetType = "autosnippet" }, {
     t("upright("),
-    f(function(_, snip) return snip.captures[1] end),
+    f(function(_, snip)
+      return snip.captures[1]
+    end),
     t(")"),
   }),
 
-  -- Operators and symbols (with autosnippet since they had iA in the hsnips file)
+  -- Operators and symbols (with autosnippet)
   s({ trig = "pm", dscr = "Plus-minus", snippetType = "autosnippet" }, { t("plus.minus"), i(0) }),
   s({ trig = "mp", dscr = "Minus-plus", snippetType = "autosnippet" }, { t("minus.plus"), i(0) }),
 
-  -- Fraction (with autosnippet since it had iA in the hsnips file)
+  -- Fraction (with autosnippet)
   s({ trig = "@/", dscr = "Fraction", snippetType = "autosnippet" }, {
-    t("("), i(1), t(")/("), i(2), t(")"), i(0)
+    t("("),
+    i(1),
+    t(")/("),
+    i(2),
+    t(")"),
+    i(0),
   }),
 
-  -- Upright (with autosnippet since it had iA in the hsnips file)
+  -- Upright (with autosnippet)
   s({ trig = "ur", dscr = "Upright", snippetType = "autosnippet" }, {
-    t("upright("), i(1), t(")"), i(0)
+    t("upright("),
+    i(1),
+    t(")"),
+    i(0),
   }),
 
-  -- Integral (with autosnippet since it had iA in the hsnips file)
+  -- Integral (with autosnippet)
   s({ trig = "jf", dscr = "Integral", snippetType = "autosnippet" }, { t("integral") }),
 
-  -- Underbrace (with autosnippet since it had iA in the hsnips file)
+  -- Underbrace (with autosnippet)
   s({ trig = "udb", dscr = "Underbrace", snippetType = "autosnippet" }, {
-    t("underbrace("), i(0), t(")")
+    t("underbrace("),
+    i(0),
+    t(")"),
   }),
 
-  -- Quantifiers (with autosnippet since they had iA in the hsnips file)
+  -- Quantifiers (with autosnippet)
   s({ trig = "rq", dscr = "Forall", snippetType = "autosnippet" }, { t("forall") }),
   s({ trig = "cz", dscr = "Exists", snippetType = "autosnippet" }, { t("exists") }),
   s({ trig = "wo", dscr = "Without", snippetType = "autosnippet" }, { t("without") }),
 
-  -- Limit (with autosnippet since it had iA in the hsnips file)
+  -- Limit (with autosnippet)
   s({ trig = "lim", dscr = "Limit", snippetType = "autosnippet" }, {
-    t("lim_("), i(1, "n"), t(" -> "), i(2, "oo"), t(")"), i(0)
+    t("lim_("),
+    i(1, "n"),
+    t(" -> "),
+    i(2, "oo"),
+    t(")"),
+    i(0),
   }),
 
-  -- Product (with autosnippet since it had iA in the hsnips file)
+  -- Product (with autosnippet)
   s({ trig = "prod", dscr = "Product", snippetType = "autosnippet" }, { t("product") }),
 
-  -- Differential (with autosnippet since it had iA in the hsnips file)
+  -- Differential (with autosnippet)
   s({ trig = "dd", dscr = "Differential", snippetType = "autosnippet" }, {
-    t("dd("), i(1), t(")"), i(0)
+    t("dd("),
+    i(1),
+    t(")"),
+    i(0),
   }),
 
-  -- Tilde (with autosnippet since it had iA in the hsnips file)
+  -- Tilde (with autosnippet)
   s({ trig = "~~", dscr = "Tilde", snippetType = "autosnippet" }, { t("tilde") }),
 
-  -- Display (with autosnippet since it had iA in the hsnips file)
+  -- Display (with autosnippet)
   s({ trig = "disp", dscr = "Display", snippetType = "autosnippet" }, {
-    t("display("), i(0), t(")")
+    t("display("),
+    i(0),
+    t(")"),
   }),
 
-  -- Matrix (with autosnippet for "A" marker in the hsnips file)
+  -- Matrix (with autosnippet for "A" marker in the  file)
   s({ trig = "Bmat", dscr = "Bmatrix", snippetType = "autosnippet" }, {
-    t('mat(delim: "{",'), i(0), t(")")
+    t('mat(delim: "{",'),
+    i(0),
+    t(")"),
   }),
 }
 
