@@ -33,11 +33,11 @@ local function in_typst_math()
   while node do
     local type = node:type()
     if
-      type == "math"
-      or type == "math_inline"
-      or type == "math_display"
-      or type == "inline_math"
-      or type == "display_math"
+        type == "math"
+        or type == "math_inline"
+        or type == "math_display"
+        or type == "inline_math"
+        or type == "display_math"
     then
       return true
     end
@@ -219,7 +219,11 @@ local typst_snippets = {
   -- Quantifiers (with autosnippet)
   s({ trig = "rq", dscr = "Forall", snippetType = "autosnippet" }, { t("forall") }),
   s({ trig = "cz", dscr = "Exists", snippetType = "autosnippet" }, { t("exists") }),
-  s({ trig = "wo", dscr = "Without", snippetType = "autosnippet" }, { t("without") }),
+  s({ trig = "wo", dscr = "Without", snippetType = "autosnippet" }, { t("without") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 
   -- Limit (with autosnippet)
   s({ trig = "lim", dscr = "Limit", snippetType = "autosnippet" }, {
