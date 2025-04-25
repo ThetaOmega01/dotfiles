@@ -1,0 +1,8 @@
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+    starship init fish | source
+    alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+    alias vi='nvim'
+    alias vim='nvim'
+    set fish_greeting ''
+end
