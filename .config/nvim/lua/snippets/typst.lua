@@ -33,11 +33,11 @@ local function in_typst_math()
   while node do
     local type = node:type()
     if
-        type == "math"
-        or type == "math_inline"
-        or type == "math_display"
-        or type == "inline_math"
-        or type == "display_math"
+      type == "math"
+      or type == "math_inline"
+      or type == "math_display"
+      or type == "inline_math"
+      or type == "display_math"
     then
       return true
     end
@@ -164,6 +164,15 @@ local typst_snippets = {
       return snip.captures[1]
     end),
     t(")"),
+  }),
+
+  -- Bold and upright characters (with autosnippet)
+  s({ trig = "ubf([a-zA-Z])", regTrig = true, dscr = "Bold character(upright)", snippetType = "autosnippet" }, {
+    t("upright(bold("),
+    f(function(_, snip)
+      return snip.captures[1]
+    end),
+    t("))"),
   }),
 
   -- Calligraphic characters (with autosnippet)
