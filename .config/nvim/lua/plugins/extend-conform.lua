@@ -4,7 +4,6 @@ return {
     opts = {
       formatters_by_ft = {
         typst = { "typstyle" },
-        c = { "clang-format" },
       },
     },
   },
