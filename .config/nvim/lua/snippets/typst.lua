@@ -8,6 +8,7 @@ local c = ls.choice_node
 local d = ls.dynamic_node
 local r = ls.restore_node
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local conds = require("luasnip.extras.expand_conditions")
 
@@ -45,6 +46,27 @@ local function in_typst_math()
   end
 
   return false
+end
+
+-- Matrix generator function
+local generate_matrix = function(args, snip)
+  local rows = tonumber(snip.captures[1])
+  local cols = tonumber(snip.captures[2])
+  local nodes = {}
+  local ins_indx = 1
+  for j = 1, rows do
+    table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
+    ins_indx = ins_indx + 1
+    for k = 2, cols do
+      table.insert(nodes, t(" , "))
+      table.insert(nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1)))
+      ins_indx = ins_indx + 1
+    end
+    table.insert(nodes, t({ ";", "" }))
+  end
+  -- fix last node.
+  nodes[#nodes] = t("")
+  return sn(nil, nodes)
 end
 
 local typst_snippets = {
@@ -271,6 +293,22 @@ local typst_snippets = {
     i(0),
     t(")"),
   }),
+
+  s(
+    { trig = "mat(%d+)x(%d+)", regTrig = true, dscr = "matrix", snippetType = "autosnippet", hidden = true },
+    fmta(
+      [[
+      mat(
+      <>)
+      ]],
+      {
+        d(1, generate_matrix),
+      }
+    ),
+    {
+      condition = in_typst_math,
+    }
+  ),
 }
 
 return typst_snippets
