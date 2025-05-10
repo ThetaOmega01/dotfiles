@@ -4,5 +4,6 @@ if status is-interactive
     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
     alias vi='nvim'
     alias vim='nvim'
+    alias nv='nvim'
     set fish_greeting ''
 end
