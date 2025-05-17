@@ -7,7 +7,7 @@ local f = ls.function_node
 local c = ls.choice_node
 local d = ls.dynamic_node
 local r = ls.restore_node
-local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local conds = require("luasnip.extras.expand_conditions")
 
@@ -17,24 +17,24 @@ local function in_mathzone()
 end
 
 -- Matrix generator function
-local function gen_matrix(nrow, ncol, index)
-  local results = "\n"
-  local order = 1
-  for i = 0, nrow - 1 do
-    results = results .. "    "
-    for j = 0, ncol - 1 do
-      if j == ncol - 1 then
-        results = results .. " \\\\"
-      else
-        results = results .. " & "
-      end
-      order = order + 1
+local generate_matrix = function(args, snip)
+  local rows = tonumber(snip.captures[1])
+  local cols = tonumber(snip.captures[2])
+  local nodes = {}
+  local ins_indx = 1
+  for j = 1, rows do
+    table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
+    ins_indx = ins_indx + 1
+    for k = 2, cols do
+      table.insert(nodes, t(" & "))
+      table.insert(nodes, r(ins_indx, tostring(j) .. "x" .. tostring(k), i(1)))
+      ins_indx = ins_indx + 1
     end
-    if index then
-      results = results .. "\n"
-    end
+    table.insert(nodes, t({ "\\\\", "" }))
   end
-  return results
+  -- fix last node.
+  nodes[#nodes] = t("\\\\")
+  return sn(nil, nodes)
 end
 
 -- Define the snippets
@@ -42,8 +42,9 @@ local snippets = {
   -- VSCode snippets from latex.json
   s("mk", {
     t("$ "),
-    i(0),
+    i(1),
     t(" $"),
+    i(0),
   }),
 
   s("dm", {
@@ -589,15 +590,31 @@ local snippets = {
     end),
   }, { condition = in_mathzone }),
 
-  s({ trig = "([1-9])([1-9])(bm|pm|m|vm)at", regTrig = true, dscr = "matrix", snippetType = "autosnippet" }, {
-    f(function(_, snip)
-      local rows = tonumber(snip.captures[1])
-      local cols = tonumber(snip.captures[2])
-      local mtype = snip.captures[3]
-      return "\\begin{" .. mtype .. "atrix}" .. gen_matrix(rows, cols, true) .. "\\end{" .. mtype .. "atrix}"
-    end),
-    i(0),
-  }, { condition = in_mathzone }),
+  s(
+    {
+      trig = "(%d)(%d)([bBpvV])mat",
+      name = "[bBpvV]matrix",
+      dscr = "matrices",
+      snippetType = "autosnippet",
+      regTrig = true,
+    },
+    fmta(
+      [[
+    \begin{<>}
+    <>
+    \end{<>}]],
+      {
+        f(function(_, snip)
+          return snip.captures[3] .. "matrix"
+        end),
+        d(1, generate_matrix),
+        f(function(_, snip)
+          return snip.captures[3] .. "matrix"
+        end),
+      }
+    ),
+    { condition = in_mathzone }
+  ),
 
   s({ trig = "([a-zA-Z])bar", regTrig = true, dscr = "bar", snippetType = "autosnippet" }, {
     t("\\overline{"),
@@ -735,19 +752,19 @@ local snippets = {
   s({ trig = "@vq", dscr = "vartheta", snippetType = "autosnippet" }, { t("\\vartheta") }, { condition = in_mathzone }),
 
   -- Delimiters
-  s({ trig = "@(", dscr = "()", snippetType = "autosnippet" }, {
+  s({ trig = "@()", dscr = "()", snippetType = "autosnippet" }, {
     t("\\left( "),
     i(1),
     t(" \\right)"),
   }, { condition = in_mathzone }),
 
-  s({ trig = "@{", dscr = "{}", snippetType = "autosnippet" }, {
+  s({ trig = "@{}", dscr = "{}", snippetType = "autosnippet" }, {
     t("\\left\\{ "),
     i(1),
     t(" \\right\\}"),
   }, { condition = in_mathzone }),
 
-  s({ trig = "@[", dscr = "[]", snippetType = "autosnippet" }, {
+  s({ trig = "@[]", dscr = "[]", snippetType = "autosnippet" }, {
     t("\\left[ "),
     i(1),
     t(" \\right]"),
