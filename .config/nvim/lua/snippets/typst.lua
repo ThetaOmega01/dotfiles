@@ -285,6 +285,10 @@ local typst_snippets = {
     t("display("),
     i(0),
     t(")"),
+  }, {
+    condition = function()
+      return in_typst_math()
+    end,
   }),
 
   -- Matrix (with autosnippet for "A" marker in the  file)
