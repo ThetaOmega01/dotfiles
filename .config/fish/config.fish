@@ -6,4 +6,5 @@ if status is-interactive
     alias vim='nvim'
     alias nv='nvim'
     set fish_greeting ''
+    fish_vi_key_bindings
 end
