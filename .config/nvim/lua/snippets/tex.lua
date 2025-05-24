@@ -119,16 +119,6 @@ local snippets = {
     t({ "", "\\end{law}" }),
   }),
 
-  s({ trig = "zwq", snippetType = "autosnippet" }, {
-    t("+\\infty "),
-    i(0),
-  }, { condition = in_mathzone }),
-
-  s({ trig = "fwq", snippetType = "autosnippet" }, {
-    t("-\\infty "),
-    i(0),
-  }, { condition = in_mathzone }),
-
   s("iff", {
     t("if and only if "),
   }),
@@ -435,7 +425,7 @@ local snippets = {
     t("\\leftarrow"),
   }, { condition = in_mathzone }),
 
-  s({ trig = "wq", dscr = "infinity", snippetType = "autosnippet" }, {
+  s({ trig = "oo", dscr = "infinity", snippetType = "autosnippet" }, {
     t("\\infty"),
   }, { condition = in_mathzone }),
 
