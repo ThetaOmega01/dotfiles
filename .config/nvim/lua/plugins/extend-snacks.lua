@@ -1,9 +1,11 @@
 return {
   "snacks.nvim",
+  init = function()
+    vim.g.snacks_animate = false
+  end,
   opts = {
     dashboard = {
       preset = {
-        -- Set the header to an empty string to remove the ASCII art
         header = "",
       },
     },
