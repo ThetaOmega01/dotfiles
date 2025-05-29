@@ -16,7 +16,7 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 local function in_mathzone()
   local node = ts_utils.get_node_at_cursor()
   while node do
-    if node:type() == "latex_block" then
+    if node:type() == "inline_formula" or "displayed_equation" then
       return true
     end
     node = node:parent()
