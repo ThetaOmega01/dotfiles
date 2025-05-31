@@ -582,7 +582,7 @@ local snippets = {
 
   s(
     {
-      trig = "(%d)(%d)([bBpvV])mat",
+      trig = "(%d)(%d)([bBpvV]?)mat",
       name = "[bBpvV]matrix",
       dscr = "matrices",
       snippetType = "autosnippet",
