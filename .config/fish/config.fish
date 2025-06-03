@@ -5,7 +5,6 @@ if status is-interactive
     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
     set fish_greeting ''
     fish_vi_key_bindings
-    add_ssh_key_with_keychain
     add_abbr
 end
 
