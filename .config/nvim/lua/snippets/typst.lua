@@ -33,13 +33,7 @@ local function in_typst_math()
   -- Walk up the tree to find math environments
   while node do
     local type = node:type()
-    if
-      type == "math"
-      or type == "math_inline"
-      or type == "math_display"
-      or type == "inline_math"
-      or type == "display_math"
-    then
+    if type == "math" then
       return true
     end
     node = node:parent()
@@ -73,48 +67,200 @@ local typst_snippets = {
   s({ trig = "mk", dscr = "inline math" }, { t("$"), i(1), t(" $"), i(0) }),
   s({ trig = "dm", dscr = "display math" }, { t("$ "), i(0), t(" $") }),
   -- Greek letters (with autosnippet)
-  s({ trig = "@a", dscr = "alpha", snippetType = "autosnippet" }, { t("alpha") }),
-  s({ trig = "@b", dscr = "beta", snippetType = "autosnippet" }, { t("beta") }),
-  s({ trig = "@c", dscr = "chi", snippetType = "autosnippet" }, { t("chi") }),
-  s({ trig = "@d", dscr = "delta", snippetType = "autosnippet" }, { t("delta") }),
-  s({ trig = "@e", dscr = "epsilon", snippetType = "autosnippet" }, { t("epsilon") }),
-  s({ trig = "@f", dscr = "phi", snippetType = "autosnippet" }, { t("phi") }),
-  s({ trig = "@g", dscr = "gamma", snippetType = "autosnippet" }, { t("gamma") }),
-  s({ trig = "@h", dscr = "eta", snippetType = "autosnippet" }, { t("eta") }),
-  s({ trig = "@i", dscr = "iota", snippetType = "autosnippet" }, { t("iota") }),
-  s({ trig = "@k", dscr = "kappa", snippetType = "autosnippet" }, { t("kappa") }),
-  s({ trig = "@l", dscr = "lambda", snippetType = "autosnippet" }, { t("lambda") }),
-  s({ trig = "@m", dscr = "mu", snippetType = "autosnippet" }, { t("mu") }),
-  s({ trig = "@n", dscr = "nu", snippetType = "autosnippet" }, { t("nu") }),
-  s({ trig = "@p", dscr = "pi", snippetType = "autosnippet" }, { t("pi") }),
-  s({ trig = "@q", dscr = "theta", snippetType = "autosnippet" }, { t("theta") }),
-  s({ trig = "@r", dscr = "rho", snippetType = "autosnippet" }, { t("rho") }),
-  s({ trig = "@s", dscr = "sigma", snippetType = "autosnippet" }, { t("sigma") }),
-  s({ trig = "@t", dscr = "tau", snippetType = "autosnippet" }, { t("tau") }),
-  s({ trig = "@u", dscr = "upsilon", snippetType = "autosnippet" }, { t("upsilon") }),
-  s({ trig = "@o", dscr = "omega", snippetType = "autosnippet" }, { t("omega") }),
-  s({ trig = "@&", dscr = "wedge", snippetType = "autosnippet" }, { t("wedge") }),
-  s({ trig = "@x", dscr = "xi", snippetType = "autosnippet" }, { t("xi") }),
-  s({ trig = "@y", dscr = "psi", snippetType = "autosnippet" }, { t("psi") }),
-  s({ trig = "@z", dscr = "zeta", snippetType = "autosnippet" }, { t("zeta") }),
+  s({ trig = "@a", dscr = "alpha", snippetType = "autosnippet" }, { t("alpha") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@b", dscr = "beta", snippetType = "autosnippet" }, { t("beta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@c", dscr = "chi", snippetType = "autosnippet" }, { t("chi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@d", dscr = "delta", snippetType = "autosnippet" }, { t("delta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@e", dscr = "epsilon", snippetType = "autosnippet" }, { t("epsilon") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@f", dscr = "phi", snippetType = "autosnippet" }, { t("phi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@g", dscr = "gamma", snippetType = "autosnippet" }, { t("gamma") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@h", dscr = "eta", snippetType = "autosnippet" }, { t("eta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@i", dscr = "iota", snippetType = "autosnippet" }, { t("iota") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@k", dscr = "kappa", snippetType = "autosnippet" }, { t("kappa") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@l", dscr = "lambda", snippetType = "autosnippet" }, { t("lambda") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@m", dscr = "mu", snippetType = "autosnippet" }, { t("mu") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@n", dscr = "nu", snippetType = "autosnippet" }, { t("nu") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@p", dscr = "pi", snippetType = "autosnippet" }, { t("pi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@q", dscr = "theta", snippetType = "autosnippet" }, { t("theta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@r", dscr = "rho", snippetType = "autosnippet" }, { t("rho") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@s", dscr = "sigma", snippetType = "autosnippet" }, { t("sigma") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@t", dscr = "tau", snippetType = "autosnippet" }, { t("tau") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@u", dscr = "upsilon", snippetType = "autosnippet" }, { t("upsilon") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@o", dscr = "omega", snippetType = "autosnippet" }, { t("omega") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@&", dscr = "wedge", snippetType = "autosnippet" }, { t("wedge") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@x", dscr = "xi", snippetType = "autosnippet" }, { t("xi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@y", dscr = "psi", snippetType = "autosnippet" }, { t("psi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@z", dscr = "zeta", snippetType = "autosnippet" }, { t("zeta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 
   -- Capital Greek letters (with autosnippet)
-  s({ trig = "@D", dscr = "Delta", snippetType = "autosnippet" }, { t("Delta") }),
-  s({ trig = "@F", dscr = "Phi", snippetType = "autosnippet" }, { t("Phi") }),
-  s({ trig = "@G", dscr = "Gamma", snippetType = "autosnippet" }, { t("Gamma") }),
-  s({ trig = "@Q", dscr = "Theta", snippetType = "autosnippet" }, { t("Theta") }),
-  s({ trig = "@L", dscr = "Lambda", snippetType = "autosnippet" }, { t("Lambda") }),
-  s({ trig = "@X", dscr = "Xi", snippetType = "autosnippet" }, { t("Xi") }),
-  s({ trig = "@Y", dscr = "Psi", snippetType = "autosnippet" }, { t("Psi") }),
-  s({ trig = "@S", dscr = "Sigma", snippetType = "autosnippet" }, { t("Sigma") }),
-  s({ trig = "@U", dscr = "Upsilon", snippetType = "autosnippet" }, { t("Upsilon") }),
-  s({ trig = "@W", dscr = "Omega", snippetType = "autosnippet" }, { t("Omega") }),
+  s({ trig = "@D", dscr = "Delta", snippetType = "autosnippet" }, { t("Delta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@F", dscr = "Phi", snippetType = "autosnippet" }, { t("Phi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@G", dscr = "Gamma", snippetType = "autosnippet" }, { t("Gamma") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@Q", dscr = "Theta", snippetType = "autosnippet" }, { t("Theta") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@L", dscr = "Lambda", snippetType = "autosnippet" }, { t("Lambda") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@X", dscr = "Xi", snippetType = "autosnippet" }, { t("Xi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@Y", dscr = "Psi", snippetType = "autosnippet" }, { t("Psi") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@S", dscr = "Sigma", snippetType = "autosnippet" }, { t("Sigma") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@U", dscr = "Upsilon", snippetType = "autosnippet" }, { t("Upsilon") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@W", dscr = "Omega", snippetType = "autosnippet" }, { t("Omega") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 
   -- Variant letters (with autosnippet)
-  s({ trig = "@ve", dscr = "varepsilon", snippetType = "autosnippet" }, { t("epsilon.alt") }),
-  s({ trig = "@vf", dscr = "varphi", snippetType = "autosnippet" }, { t("phi.alt") }),
-  s({ trig = "@vs", dscr = "varsigma", snippetType = "autosnippet" }, { t("sigma.alt") }),
-  s({ trig = "@vq", dscr = "vartheta", snippetType = "autosnippet" }, { t("theta.alt") }),
+  s({ trig = "@ve", dscr = "varepsilon", snippetType = "autosnippet" }, { t("epsilon.alt") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@vf", dscr = "varphi", snippetType = "autosnippet" }, { t("phi.alt") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@vs", dscr = "varsigma", snippetType = "autosnippet" }, { t("sigma.alt") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
+  s({ trig = "@vq", dscr = "vartheta", snippetType = "autosnippet" }, { t("theta.alt") }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 
   -- Roman letters (with autosnippet)
   s({ trig = "ee", dscr = "Roman e", snippetType = "autosnippet" }, { t("upright(e)") }, {
@@ -137,14 +283,14 @@ local typst_snippets = {
   }),
 
   s({
-    trig = "(%a)(%d)",
+    trig = "([a-zA-Z])([0-9])",
     regTrig = true,
     snippetType = "autosnippet",
   }, {
     f(function(_, snip)
       local letter = snip.captures[1]
       local number = snip.captures[2]
-      return string.format("%s_%s", letter, number)
+      return string.format("%s_(%s)", letter, number)
     end, {}),
   }, {
     condition = function()

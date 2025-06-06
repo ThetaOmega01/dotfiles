@@ -23,6 +23,7 @@ return {
       "lspinfo",
       "noice",
       "Trouble",
+      "typst",
     },
     -- Only check the current file for line length
     scope = "file",
