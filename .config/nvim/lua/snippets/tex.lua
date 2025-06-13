@@ -17,7 +17,7 @@ local function in_mathzone()
 end
 
 -- Matrix generator function
-local generate_matrix = function(args, snip)
+local generate_matrix = function(snip)
   local rows = tonumber(snip.captures[1])
   local cols = tonumber(snip.captures[2])
   local nodes = {}
@@ -797,48 +797,6 @@ local snippets = {
     i(0),
   }, { condition = in_mathzone }),
 
-  -- Functions with priority
-  s({
-    trig = "(?<!\\\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)",
-    regTrig = true,
-    dscr = "math functions",
-    snippetType = "autosnippet",
-  }, {
-    f(function(_, snip)
-      return "\\" .. snip.captures[1]
-    end),
-  }, {
-    condition = in_mathzone,
-    priority = 200,
-  }),
-
-  s({
-    trig = "(?<!\\\\)(sin|cos|tan|arccot|cot|csc|ln|log|exp|star|perp)",
-    regTrig = true,
-    dscr = "math functions",
-    snippetType = "autosnippet",
-  }, {
-    f(function(_, snip)
-      return "\\" .. snip.captures[1]
-    end),
-  }, {
-    condition = in_mathzone,
-    priority = 100,
-  }),
-
-  s({
-    trig = "(?<!\\\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int|cap|cup)",
-    regTrig = true,
-    dscr = "math functions",
-    snippetType = "autosnippet",
-  }, {
-    f(function(_, snip)
-      return "\\" .. snip.captures[1]
-    end),
-  }, {
-    condition = in_mathzone,
-    priority = 200,
-  }),
   s({ trig = "__", wordTrig = false, dscr = "subscript", snippetType = "autosnippet" }, {
     t("_{"),
     i(1),

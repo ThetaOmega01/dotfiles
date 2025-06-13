@@ -1,6 +1,6 @@
 return {
-  "lervag/vimtex",
+  "levarg/vimtex",
   config = function()
-    vim.g.vimtex_compiler_method = "tectonic"
+    vim.g.vimtex_syntax_conceal_disable = 1
   end,
 }
