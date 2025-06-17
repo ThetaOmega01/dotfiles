@@ -459,6 +459,17 @@ local typst_snippets = {
       condition = in_typst_math,
     }
   ),
+
+  s({ trig = "lrang", descr = "Left and right angle brackets", snippetType = "autosnippet" }, {
+    t("angle.l "),
+    i(1),
+    t(" angle.r"),
+    i(0),
+  }, {
+    condition = function()
+      return in_typst_math()
+    end,
+  }),
 }
 
 return typst_snippets
