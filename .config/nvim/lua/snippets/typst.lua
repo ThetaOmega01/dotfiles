@@ -43,7 +43,7 @@ local function in_typst_math()
 end
 
 -- Matrix generator function
-local generate_matrix = function(args, snip)
+local generate_matrix = function(snip)
   local rows = tonumber(snip.captures[1])
   local cols = tonumber(snip.captures[2])
   local nodes = {}
@@ -284,13 +284,14 @@ local typst_snippets = {
 
   s({
     trig = "([a-zA-Z])([0-9])",
+    dscr = "Subscript with letter and number",
     regTrig = true,
     snippetType = "autosnippet",
   }, {
     f(function(_, snip)
       local letter = snip.captures[1]
       local number = snip.captures[2]
-      return string.format("%s_(%s)", letter, number)
+      return string.format("%s_%s", letter, number)
     end, {}),
   }, {
     condition = function()
@@ -326,21 +327,29 @@ local typst_snippets = {
   }),
 
   -- Bold characters (with autosnippet)
-  s({ trig = "bf([a-zA-Z])", regTrig = true, dscr = "Bold character", snippetType = "autosnippet" }, {
+  s({ trig = "b([a-zA-Z0-9])", regTrig = true, dscr = "Bold character", snippetType = "autosnippet" }, {
     t("bold("),
     f(function(_, snip)
       return snip.captures[1]
     end),
     t(")"),
+  }, {
+    condition = function()
+      return in_typst_math()
+    end,
   }),
 
   -- Bold and upright characters (with autosnippet)
-  s({ trig = "ubf([a-zA-Z])", regTrig = true, dscr = "Bold character(upright)", snippetType = "autosnippet" }, {
+  s({ trig = "ub([a-zA-Z0-9])", regTrig = true, dscr = "Bold character(upright)", snippetType = "autosnippet" }, {
     t("upright(bold("),
     f(function(_, snip)
       return snip.captures[1]
     end),
     t("))"),
+  }, {
+    condition = function()
+      return in_typst_math()
+    end,
   }),
 
   -- Calligraphic characters (with autosnippet)
@@ -410,6 +419,10 @@ local typst_snippets = {
     i(2, "oo"),
     t(")"),
     i(0),
+  }, {
+    condition = function()
+      return in_typst_math()
+    end,
   }),
 
   -- Product (with autosnippet)

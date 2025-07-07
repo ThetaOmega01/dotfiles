@@ -1,10 +1,5 @@
 return {
-  -- add jb
-  { "nickkadutskyi/jb.nvim" },
-  {
-    "Lazyvim/LazyVim",
-    opts = {
-      colorscheme = "jb",
-    },
-  },
+  "folke/tokyonight.nvim",
+  lazy = true,
+  opts = { style = "night" },
 }

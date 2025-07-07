@@ -6,7 +6,7 @@ return {
       python = "88",
       cpp = "80",
       c = "80",
-      rust = "80",
+      rust = "100",
       javascript = "80",
       typescript = "80",
       lua = "120",
