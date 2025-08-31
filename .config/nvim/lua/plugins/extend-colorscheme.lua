@@ -1,10 +1,10 @@
 return {
-  { "ellisonleao/gruvbox.nvim" },
+  { "miikanissi/modus-themes.nvim" },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "modus_vivendi",
     },
   },
 }
