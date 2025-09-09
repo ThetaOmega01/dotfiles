@@ -1,5 +1,8 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    # Set en-US
+    set -x LANG "en_US.UTF-8"
+    set -x LC_ALL "en_US.UTF-8"
     starship init fish | source
     zoxide init fish | source
     direnv hook fish | source
