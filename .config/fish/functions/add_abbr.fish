@@ -8,5 +8,6 @@ function add_abbr
     abbr --add eal eza -al
     abbr --add el eza -l
     abbr --add et eza -T
+    abbr --add e1 eza -1
     abbr --add etg eza -T --git-ignore
 end
