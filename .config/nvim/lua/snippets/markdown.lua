@@ -11,12 +11,15 @@ local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local conds = require("luasnip.extras.expand_conditions")
 
-local ts_utils = require("nvim-treesitter.ts_utils")
-
 local function in_mathzone()
-  local node = ts_utils.get_node_at_cursor()
+  local node = vim.treesitter.get_node({
+    bufnr = 0,
+    ignore_injections = false,
+    include_anonymous = false,
+  })
+
   while node do
-    if node:type() == "inline_formula" or "displayed_equation" then
+    if node:type() == "inline_formula" or node:type() == "displayed_equation" then
       return true
     end
     node = node:parent()
@@ -597,48 +600,6 @@ local snippets = {
     i(0),
   }, { condition = in_mathzone }),
 
-  -- Functions with priority
-  s({
-    trig = "(?<!\\\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)",
-    regTrig = true,
-    dscr = "math functions",
-    snippetType = "autosnippet",
-  }, {
-    f(function(_, snip)
-      return "\\" .. snip.captures[1]
-    end),
-  }, {
-    condition = in_mathzone,
-    priority = 200,
-  }),
-
-  s({
-    trig = "(?<!\\\\)(sin|cos|tan|arccot|cot|csc|ln|log|exp|star|perp)",
-    regTrig = true,
-    dscr = "math functions",
-    snippetType = "autosnippet",
-  }, {
-    f(function(_, snip)
-      return "\\" .. snip.captures[1]
-    end),
-  }, {
-    condition = in_mathzone,
-    priority = 100,
-  }),
-
-  s({
-    trig = "(?<!\\\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int|cap|cup)",
-    regTrig = true,
-    dscr = "math functions",
-    snippetType = "autosnippet",
-  }, {
-    f(function(_, snip)
-      return "\\" .. snip.captures[1]
-    end),
-  }, {
-    condition = in_mathzone,
-    priority = 200,
-  }),
   s({ trig = "__", wordTrig = false, dscr = "subscript", snippetType = "autosnippet" }, {
     t("_{"),
     i(1),
