@@ -17,7 +17,7 @@ local function in_mathzone()
 end
 
 -- Matrix generator function
-local generate_matrix = function(snip)
+local generate_matrix = function(args, snip)
   local rows = tonumber(snip.captures[1])
   local cols = tonumber(snip.captures[2])
   local nodes = {}
