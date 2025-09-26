@@ -1,10 +1,9 @@
 return {
-  { "miikanissi/modus-themes.nvim", priority = 1000 },
-
+  { "catppuccin/nvim", lazy = true, name = "catppuccin", commit = "f19cab18ec4dc86d415512c7a572863b2adbcc18" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "modus_vivendi",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }
