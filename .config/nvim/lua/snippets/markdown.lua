@@ -50,7 +50,7 @@ end
 
 -- Define the snippets
 local snippets = {
-  s("mk", fmta([[$ <> $<>]], { i(1), i(0) })),
+  s("mk", fmta([[$<>$<>]], { i(1), i(0) })),
 
   s("dm", {
     t("$$"),
