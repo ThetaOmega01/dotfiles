@@ -534,16 +534,28 @@ local snippets = {
   }, { condition = in_mathzone }),
 
   -- Regex-based snippets
-  s({ trig = "m(bf|rm|bb|scr|cal)", regTrig = true, dscr = "math font", snippetType = "autosnippet" }, {
-    f(function(_, snip)
-      local capture = snip.captures[1]
-      return "\\math" .. capture .. "{"
-    end),
-    i(1),
-    t("}"),
-  }, { condition = in_mathzone }),
+  s(
+    { trig = "m(bf|bb)", trigEngine = "ecma", dscr = "math font", snippetType = "autosnippet" },
+    fmta([[\math<>{<>}]], { f(function(_, snip)
+      return snip.captures[1]
+    end), i(1) }),
+    { condition = in_mathzone }
+  ),
 
-  s({ trig = "(or|and)", regTrig = true, dscr = "logical or/and", snippetType = "autosnippet" }, {
+  s(
+    {
+      trig = "(sin|cos|tan|csc|sec|cot|arcsin|arccos|arctan|sinh|cosh|tanh|log|ln)",
+      trigEngine = "ecma",
+      dscr = "trig/log functions",
+      snippetType = "autosnippet",
+    },
+    fmta([[\<>]], { f(function(_, snip)
+      return snip.captures[1]
+    end) }),
+    { condition = in_mathzone }
+  ),
+
+  s({ trig = "(or|and)", trigEngine = "ecma", dscr = "logical or/and", snippetType = "autosnippet" }, {
     f(function(_, snip)
       local capture = snip.captures[1]
       return "\\l" .. capture
