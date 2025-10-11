@@ -535,7 +535,7 @@ local snippets = {
 
   -- Regex-based snippets
   s(
-    { trig = "m(bf|bb)", trigEngine = "ecma", dscr = "math font", snippetType = "autosnippet" },
+    { trig = "m(bf|bb|rm|cal|scr)", trigEngine = "ecma", dscr = "math font", snippetType = "autosnippet" },
     fmta([[\math<>{<>}]], { f(function(_, snip)
       return snip.captures[1]
     end), i(1) }),
