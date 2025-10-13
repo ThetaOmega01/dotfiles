@@ -13,32 +13,18 @@ local rep = require("luasnip.extras").rep
 local conds = require("luasnip.extras.expand_conditions")
 
 local function in_typst_math()
-  local ok, parsers = pcall(require, "nvim-treesitter.parsers")
-  if not ok then
-    return false
-  end
+  local node = vim.treesitter.get_node({
+    bufnr = 0,
+    ignore_injections = false,
+    include_anonymous = false,
+  })
 
-  -- Check if typst parser is available
-
-  if not parsers.has_parser("typst") then
-    return false
-  end
-
-  local ts_utils = require("nvim-treesitter.ts_utils")
-  local node = ts_utils.get_node_at_cursor()
-  if not node then
-    return false
-  end
-
-  -- Walk up the tree to find math environments
   while node do
-    local type = node:type()
-    if type == "math" then
+    if node:type() == "math" then
       return true
     end
     node = node:parent()
   end
-
   return false
 end
 
