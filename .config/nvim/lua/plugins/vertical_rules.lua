@@ -3,7 +3,7 @@ return {
   opts = {
     -- Custom colorcolumn per filetype
     custom_colorcolumn = {
-      python = "88",
+      python = "120",
       cpp = "80",
       c = "80",
       rust = "100",
