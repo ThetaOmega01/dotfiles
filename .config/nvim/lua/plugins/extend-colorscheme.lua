@@ -1,9 +1,9 @@
 return {
-  { "catppuccin/nvim", lazy = true, name = "catppuccin" },
+  { "miikanissi/modus-themes.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "modus_vivendi",
     },
   },
 }
