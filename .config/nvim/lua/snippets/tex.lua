@@ -39,7 +39,6 @@ end
 
 -- Define the snippets
 local snippets = {
-  -- VSCode snippets from latex.json
   s("mk", {
     t("$ "),
     i(1),
@@ -596,9 +595,9 @@ local snippets = {
     {
       trig = "(%d)(%d)([bBpvV]?)mat",
       name = "[bBpvV]matrix",
+      trigEngine = "ecma",
       dscr = "matrices",
       snippetType = "autosnippet",
-      regTrig = true,
     },
     fmta(
       [[
@@ -815,6 +814,12 @@ local snippets = {
     t("}"),
     i(0),
   }, { condition = in_mathzone }),
+
+  s({
+    trig = "tt",
+    dscr = "\\text{}",
+    snippetType = "autosnippet",
+  }, fmta([[\text{<>}]], { i(1) }), { condition = in_mathzone }),
 
   s({ trig = "~~", wordTrig = false, dscr = "~", snippetType = "autosnippet" }, {
     t("\\sim "),
