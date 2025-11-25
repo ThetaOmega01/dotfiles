@@ -50,7 +50,7 @@ local generate_matrix = function(snip)
 end
 
 local typst_snippets = {
-  s({ trig = "mk", dscr = "inline math" }, { t("$"), i(1), t(" $"), i(0) }),
+  s({ trig = "mk", dscr = "inline math" }, fmta("$<> $<>", { i(1), i(0) })),
   s({ trig = "dm", dscr = "display math" }, { t("$ "), i(0), t(" $") }),
   -- Greek letters (with autosnippet)
   s({ trig = "@a", dscr = "alpha", snippetType = "autosnippet" }, { t("alpha") }, {
