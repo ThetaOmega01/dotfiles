@@ -24,6 +24,7 @@ return {
       "noice",
       "Trouble",
       "typst",
+      "go",
     },
     -- Only check the current file for line length
     scope = "file",

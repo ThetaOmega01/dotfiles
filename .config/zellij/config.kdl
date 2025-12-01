@@ -300,7 +300,7 @@ themes {
         orange "#fec43f"
     }
 }
-theme "modus_vivendi"
+theme "catppuccin-mocha"
  
 // Choose the base input mode of zellij.
 // Default: normal
