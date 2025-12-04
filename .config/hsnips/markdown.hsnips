@@ -1,0 +1,239 @@
+global
+function math(context) {
+    const scopes = context.scopes;
+    return scopes.some(s => s.includes("math") || s.includes("katex") || s.includes("Math"));
+}
+
+const config = {
+    greek: {
+        'a': ['alpha'], 'b': ['beta'], 'c': ['chi'], 'd': ['delta'], 'e': ['epsilon'],
+        'f': ['phi'], 'g': ['gamma'], 'h': ['eta'], 'i': ['iota'], 'k': ['kappa'],
+        'l': ['lambda'], 'm': ['mu'], 'n': ['nu'], 'p': ['pi'], 'q': ['theta'],
+        'r': ['rho'], 's': ['sigma'], 't': ['tau'], 'u': ['upsilon'], 'o': ['omega'],
+        'x': ['xi'], 'y': ['psi'], 'z': ['zeta'], '&': ['wedge'],
+        // Capitals
+        'D': ['Delta'], 'F': ['Phi'], 'G': ['Gamma'], 'Q': ['Theta'], 'L': ['Lambda'],
+        'X': ['Xi'], 'Y': ['Psi'], 'S': ['Sigma'], 'U': ['Upsilon'], 'W': ['Omega'],
+        // Variants
+        've': ['varepsilon'], 'vf': ['varphi'], 'vs': ['varsigma'], 'vq': ['vartheta']
+    },
+
+    symbols: {
+        '.': ['cdot'], '8': ['infty'], '6': ['partial'], '@': ['circ'],
+        '0': ['^\\circ'], '*': ['times'], '=': ['equiv'], '~': ['sim'],
+        '-': ['setminus']
+    },
+
+    fonts: {
+        'mbf': 'mathbf', 'mbb': 'mathbb', 'mrm': 'mathrm',
+        'mcal': 'mathcal', 'mscr': 'mathscr', 'mfrak': 'mathfrak'
+    },
+
+    envs: {
+        'thm': 'theorem', 'prop': 'proposition', 'lma': 'lemma', 
+        'col': 'corollary', 'def': 'definition', 'rmk': 'remark', 
+        'prf': 'proof', 'note': 'note', 'eg': 'example', 
+        'bal': 'aligned'
+    }
+};
+
+function resolve_key(map, key) {
+    return map[key] ? "\\" + map[key][0] : "";
+}
+
+endglobal
+
+# =========================================================================
+# Markdown Specific Snippets
+# =========================================================================
+
+snippet mk "Inline Math"
+$${1}$${0}
+endsnippet
+
+snippet dm "Display Math"
+$$
+${0}
+$$
+endsnippet
+
+snippet Sec "Section"
+# ${1}
+${0}
+endsnippet
+
+snippet ssec "Sub Section"
+## ${1}
+${0}
+endsnippet
+
+snippet sssec "Sub Sub Section"
+### ${1}
+${0}
+endsnippet
+
+snippet bf "Bold"
+**${1}**${0}
+endsnippet
+
+snippet it "Italic"
+*${1}*${0}
+endsnippet
+
+snippet beg "Begin/End LaTeX Env" iA
+\begin{${1:env}}
+    ${0}
+\end{$1}
+endsnippet
+
+# =========================================================================
+# Math Context (Dynamic from Config)
+# =========================================================================
+
+# --- Greek Letters ---
+context math(context)
+snippet `@([a-zA-Z&]{1,2})` "Greek Letters" iA
+``rv = resolve_key(config.greek, m[1])``
+endsnippet
+
+# --- Simple Symbols ---
+context math(context)
+snippet `@([.86@0*=~-])` "Symbols" iA
+``rv = resolve_key(config.symbols, m[1])``
+endsnippet
+
+# --- Math Fonts ---
+context math(context)
+snippet `(mbf|mbb|mrm|mcal|mscr|mfrak)` "Math Fonts" iA
+\``rv = config.fonts[m[1]]``{${1}}
+endsnippet
+
+# --- Trig & Log Functions ---
+context math(context)
+snippet `(sin|cos|tan|csc|sec|cot|arcsin|arccos|arctan|sinh|cosh|tanh|log|ln|deg|det|dim|ker|hom)` "Math Functions" iA
+\\``rv = m[1]``
+endsnippet
+
+# =========================================================================
+# Math Context - Operations
+# =========================================================================
+
+context math(context)
+snippet @/ "Fraction" iA
+\frac{${1}}{${2}}${0}
+endsnippet
+
+context math(context)
+snippet @2 "Sqrt" iA
+\sqrt{${1}}
+endsnippet
+
+context math(context)
+snippet @^ "Hat" iA
+\hat{${1}}
+endsnippet
+
+context math(context)
+snippet binom "Binomial" iA
+\binom{${1}}{${2}}
+endsnippet
+
+# Auto Subscripts
+context math(context)
+snippet `([a-zA-Z])(\d)` "Auto Subscript 1" iA
+``rv = m[1]``_``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z])_(\d\d)` "Auto Subscript 2" iA
+``rv = m[1]``_{``rv = m[2]``}
+endsnippet
+
+# Matrix Generator
+context math(context)
+snippet `(\d)(\d)([bBpvV]?)mat` "Matrix" iA
+``rv = gen_matrix(m[1], m[2], m[3])``
+endsnippet
+
+# Delimiters
+context math(context)
+snippet @() "Left( Right)" iA
+\left( ${1} \right)
+endsnippet
+
+context math(context)
+snippet @{} "Left{ Right}" iA
+\left\{ ${1} \right\}
+endsnippet
+
+context math(context)
+snippet @[] "Left[ Right]" iA
+\left[ ${1} \right]
+endsnippet
+
+# =========================================================================
+# Math Context - Operators & Relations
+# =========================================================================
+
+context math(context)
+snippet jf "Integral" iA
+\int ${0} \dd{${1:x}}
+endsnippet
+
+context math(context)
+snippet djf "Definite Integral" iA
+\int_{${1}}^{${2}} ${0} \dd{${3:x}}
+endsnippet
+
+context math(context)
+snippet he "Sum" iA
+\sum_{${1}}^{${2}} ${0}
+endsnippet
+
+context math(context)
+snippet cheng "Product" iA
+\prod_{${1}}^{${2}} ${0}
+endsnippet
+
+context math(context)
+snippet lim "Limit" iA
+\lim_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+context math(context)
+snippet `(varlimsup|varliminf)` "LimSup/Inf" iA
+\``rv = m[1]``_{${1:n}\to ${2:\infty}}{${0}} 
+endsnippet
+
+context math(context)
+snippet `(sbst|rra|ra|lla|la|eqiv|EQIV|dra|dla|cong|indp)` "Relations" iA
+``
+const map = {
+    sbst: 'subseteq', rra: 'Rightarrow', ra: 'rightarrow',
+    lla: 'Leftarrow', la: 'leftarrow', eqiv: 'Leftrightarrow',
+    EQIV: 'Longleftrightarrow', dra: 'Longrightarrow', dla: 'Longleftarrow',
+    cong: 'cong', indp: 'independent'
+};
+rv = "\\" + map[m[1]];
+``
+endsnippet
+
+context math(context)
+snippet `(\^|\_)\*` "Super/Sub script" iA
+``rv = m[1]``{${1}}${0}
+endsnippet
+
+# Decorators
+context math(context)
+snippet `(ovl|udl|ovb|udb)` "Decorators" iA
+``
+const map = { ovl: 'overline', udl: 'underline', ovb: 'overbrace', udb: 'underbrace' };
+rv = "\\" + map[m[1]] + "{${0}}";
+``
+endsnippet
+
+# Sets
+context math(context)
+snippet `([CRZQ])n` "Number Sets" iA
+\mathbb{``rv = m[1]``}^{${1}}
+endsnippet

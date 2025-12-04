@@ -1,0 +1,197 @@
+global
+function math(context) {
+    const scopes = context.scopes;
+    return scopes.some(s => s.includes("math"));
+}
+
+const config = {
+    // 1. Greek Letters (Typst uses names directly, e.g., 'alpha')
+    greek: {
+        'a': 'alpha', 'b': 'beta', 'c': 'chi', 'd': 'delta', 'e': 'epsilon',
+        'f': 'phi', 'g': 'gamma', 'h': 'eta', 'i': 'iota', 'k': 'kappa',
+        'l': 'lambda', 'm': 'mu', 'n': 'nu', 'p': 'pi', 'q': 'theta',
+        'r': 'rho', 's': 'sigma', 't': 'tau', 'u': 'upsilon', 'o': 'omega',
+        'x': 'xi', 'y': 'psi', 'z': 'zeta', '&': 'wedge',
+        // Capitals
+        'D': 'Delta', 'F': 'Phi', 'G': 'Gamma', 'Q': 'Theta', 'L': 'Lambda',
+        'X': 'Xi', 'Y': 'Psi', 'S': 'Sigma', 'U': 'Upsilon', 'W': 'Omega',
+        // Variants (var- not always standard in Typst basic, mapping to standard or closest)
+        've': 'varepsilon', 'vf': 'varphi', 'vs': 'varsigma', 'vq': 'vartheta'
+    },
+
+    // 2. Symbols (Typst Syntax)
+    symbols: {
+        '.': 'dot', '8': 'oo', '6': 'diff', '@': 'circle',
+        '0': 'degree', '*': 'times', '=': 'equiv', '~': 'tilde',
+        '-': 'setminus'
+    },
+
+    // 3. Math Fonts
+    fonts: {
+        'mbf': 'bold', 'mbb': 'bb', 'mrm': 'upright',
+        'mcal': 'cal', 'mscr': 'cal', 'mfrak': 'frak'
+    }
+};
+
+endglobal
+
+snippet mk "Inline Math"
+$${1}$${0}
+endsnippet
+
+snippet dm "Display Math"
+$ ${1} $${0}
+endsnippet
+
+snippet code "Code Block"
+\`\`\`${1}
+${0}
+\`\`\`
+endsnippet
+
+# =========================================================================
+# Math Context (Dynamic from Config)
+# =========================================================================
+
+# --- Greek Letters ---
+context math(context)
+snippet `@([a-zA-Z&]{1,2})` "Greek Letters" iA
+``rv = config.greek[m[1]] || ""``
+endsnippet
+
+# --- Simple Symbols ---
+context math(context)
+snippet `@([.86@0*=~-])` "Symbols" iA
+``rv = config.symbols[m[1]] || ""``
+endsnippet
+
+# --- Math Fonts ---
+context math(context)
+snippet `(mbf|mbb|mrm|mcal|mscr|mfrak)` "Math Fonts" iA
+``rv = config.fonts[m[1]]``(${1})
+endsnippet
+
+# --- Trig & Log Functions ---
+context math(context)
+snippet `(sin|cos|tan|csc|sec|cot|arcsin|arccos|arctan|sinh|cosh|tanh|log|ln|deg|det|dim|ker|hom)` "Functions" iA
+``rv = m[1]``
+endsnippet
+
+# =========================================================================
+# Math Context - Operations
+# =========================================================================
+
+context math(context)
+snippet @/ "Fraction (Explicit)" iA
+frac(${1}, ${2})${0}
+endsnippet
+
+context math(context)
+snippet @2 "Sqrt" iA
+sqrt(${1})
+endsnippet
+
+context math(context)
+snippet @^ "Hat" iA
+hat(${1})
+endsnippet
+
+context math(context)
+snippet binom "Binomial" iA
+binom(${1}, ${2})
+endsnippet
+
+# Auto Subscripts
+context math(context)
+snippet `([a-zA-Z])(\d)` "Auto Subscript 1" iA
+``rv = m[1]``_``rv = m[2]``
+endsnippet
+
+context math(context)
+snippet `([a-zA-Z])_(\d\d)` "Auto Subscript 2" iA
+``rv = m[1]``_``rv = m[2]``
+endsnippet
+
+# =========================================================================
+# Math Context - Operators & Relations
+# =========================================================================
+
+context math(context)
+snippet jj "Integral" iA
+int 
+endsnippet
+
+context math(context)
+snippet djj "Definite Integral" iA
+int_(${1})^(${2}) 
+endsnippet
+
+context math(context)
+snippet he "Sum" iA
+sum_(${1})^(${2}) 
+endsnippet
+
+context math(context)
+snippet cheng "Product" iA
+product_(${1})^(${2}) 
+endsnippet
+
+context math(context)
+snippet lim "Limit" iA
+lim_(${1:n} -> ${2:oo}) 
+endsnippet
+
+context math(context)
+snippet `(sbst|rra|ra|lla|la|eqiv|EQIV|dra|dla|cong|indp|neq)` "Relations" iA
+``
+const map = {
+    sbst: 'subset', rra: 'arrow.r', ra: 'arrow.r',
+    lla: 'arrow.l', la: 'arrow.l', eqiv: 'arrow.l.r',
+    EQIV: 'arrow.l.r', dra: 'arrow.r.double', dla: 'arrow.l.double',
+    cong: 'cong', indp: 'tack.b', neq: '!='
+};
+rv = map[m[1]];
+``
+endsnippet
+
+context math(context)
+snippet `(in|notin)` "Sets" iA
+``rv = (m[1] === "notin" ? "in.not" : "in")``
+endsnippet
+
+# Text
+context math(context)
+snippet tt "Text" iA
+"${1}"
+endsnippet
+
+context math(context)
+snippet `(\^|\_)\*` "Super/Sub script" iA
+``rv = m[1]``(${1})${0}
+endsnippet
+
+# Decorators
+context math(context)
+snippet `(vec|dot|bar|hat)` "Decorators" iA
+``
+const map = { vec: 'vec', dot: 'dot', bar: 'overline', hat: 'hat' };
+rv = map[m[1]] + "(${1})";
+``
+endsnippet
+
+# Sets
+context math(context)
+snippet `([CRZQ])n` "Number Sets" iA
+bb(``rv = m[1]``)^(${1})
+endsnippet
+
+# Misc Typst Specifics
+context math(context)
+snippet disp "Display" iA
+display(${0})
+endsnippet
+
+context math(context)
+snippet dd "Differential" iA
+dd(${1})
+endsnippet
