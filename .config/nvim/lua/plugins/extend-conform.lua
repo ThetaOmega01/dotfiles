@@ -8,6 +8,18 @@ return {
         bib = { "tex-fmt" },
         cls = { "tex-fmt" },
         sty = { "tex-fmt" },
+        sql = { "sqlfluff" },
+        pgsql = { "sqlfluff" },
+      },
+      formatters = {
+        sqlfluff = {
+          command = "sqlfluff",
+          args = { "format", "-" },
+          stdin = true,
+          cwd = function()
+            return vim.fn.getcwd()
+          end,
+        },
       },
     },
   },
