@@ -14,7 +14,7 @@ local typst_snippets = {}
 
 core.append(typst_snippets, {
   s({ trig = "mk", dscr = "inline math" }, fmta("$<> $<>", { i(1), i(0) })),
-  s({ trig = "dm", dscr = "display math" }, { t("$ "), i(0), t(" $") }),
+  s({ trig = "dm", dscr = "display math" }, { t({ "$", "\t" }), i(0), t({ "", "$" }) }),
 })
 
 core.append(
