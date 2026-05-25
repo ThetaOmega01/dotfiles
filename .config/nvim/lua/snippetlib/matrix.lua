@@ -7,9 +7,21 @@ local r = core.r
 
 local M = {}
 
+local function matrix_dimension(capture)
+  local value = tonumber(capture)
+  if not value or value < 1 or value ~= math.floor(value) then
+    return nil
+  end
+  return value
+end
+
 function M.latex(_, snip)
-  local rows = tonumber(snip.captures[1])
-  local cols = tonumber(snip.captures[2])
+  local rows = matrix_dimension(snip.captures[1])
+  local cols = matrix_dimension(snip.captures[2])
+  if not rows or not cols then
+    return sn(nil, { i(1) })
+  end
+
   local nodes = {}
   local ins_indx = 1
   for j = 1, rows do
@@ -28,8 +40,12 @@ function M.latex(_, snip)
 end
 
 function M.typst(_, snip)
-  local rows = tonumber(snip.captures[1])
-  local cols = tonumber(snip.captures[2])
+  local rows = matrix_dimension(snip.captures[1])
+  local cols = matrix_dimension(snip.captures[2])
+  if not rows or not cols then
+    return sn(nil, { i(1) })
+  end
+
   local nodes = {}
   local ins_indx = 1
   for j = 1, rows do

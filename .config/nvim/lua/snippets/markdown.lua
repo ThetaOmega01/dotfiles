@@ -79,10 +79,16 @@ core.append(
   latex.calculus_and_linear(in_mathzone),
   latex.regex(in_mathzone, matrix.latex, {
     matrix_context = {
-      trig = "([0-9])([0-9])([bBpvV]?)mat",
+      trig = "([1-9])([1-9])([bBpvV]?)mat",
       name = "[bBpvV]matrix",
       dscr = "matrices",
       regTrig = true,
+      docstring = {
+        "\\begin{bmatrix}",
+        "$1 & $2\\\\",
+        "$3 & $4",
+        "\\end{bmatrix}",
+      },
     },
   }),
   latex.relation_symbols(in_mathzone),

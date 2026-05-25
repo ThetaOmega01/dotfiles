@@ -274,10 +274,16 @@ core.append(
   latex.regex(in_mathzone, matrix.latex, {
     math_font_trig = "m(bf|bb|rm|cal|scr)",
     matrix_context = {
-      trig = "([0-9])([0-9])([bBpvV]?)mat",
+      trig = "([1-9])([1-9])([bBpvV]?)mat",
       name = "[bBpvV]matrix",
       trigEngine = "ecma",
       dscr = "matrices",
+      docstring = {
+        "\\begin{bmatrix}",
+        "$1 & $2\\\\",
+        "$3 & $4",
+        "\\end{bmatrix}",
+      },
     },
   }),
   latex.relation_symbols(in_mathzone),

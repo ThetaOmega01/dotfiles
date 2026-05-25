@@ -207,7 +207,18 @@ function M.matrix(matrix_generator, condition)
     }, condition),
 
     autosnip(
-      { trig = "mat(%d+)x(%d+)", regTrig = true, dscr = "matrix", hidden = true },
+      {
+        trig = "([1-9])([1-9])mat",
+        regTrig = true,
+        dscr = "matrix",
+        hidden = true,
+        docstring = {
+          "mat(",
+          "$1 , $2;",
+          "$3 , $4",
+          ")",
+        },
+      },
       fmta(
         [[
       mat(
