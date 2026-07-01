@@ -1,5 +1,6 @@
 .cfg
 .config/nvim/lazy-lock.json
 .config/fish/fish_variables
+.config/fish/env.fish
 .config/nvim/lua/plugins/augment.lua
 .DS_Store
