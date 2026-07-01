@@ -18,8 +18,8 @@ end
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 # pnpm
-set -gx PNPM_HOME /Users/jt775/Library/pnpm
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
+set -gx PNPM_HOME "/Users/jt775/Library/pnpm"
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+  set -gx PATH "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
