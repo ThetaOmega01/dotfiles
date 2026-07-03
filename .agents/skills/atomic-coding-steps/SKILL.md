@@ -1,11 +1,11 @@
 ---
 name: atomic-coding-steps
-description: "Use when performing coding tasks where implementation should advance through atomic, reviewable, bisectable changes: one behavior, function, method, caller, test case, or cohesive code unit per step. Enforces per-atom verification, related tests with behavior atoms, strict refactor-vs-feature separation, no unused APIs, move-only purity, and no drive-by edits."
+description: "Use when performing coding tasks where vague or large user requests must be decomposed into atomic, reviewable, bisectable changes before implementation, then implemented one atom at a time: one behavior, function, method, caller, test case, or cohesive code unit per step. Enforces per-atom verification, mandatory stop-for-review gates, related tests with behavior atoms, strict refactor-vs-feature separation, no unused APIs, move-only purity, and no drive-by edits."
 ---
 
 # Atomic Coding Steps
 
-Use this skill to implement coding work as a sequence of small, reviewable, bisectable changes. Treat each atom like a tiny commit/CL: one purpose, one coherent code unit, one verification target, and no hidden companion work.
+Use this skill to implement coding work as a sequence of small, reviewable, bisectable changes. Treat each atom like a tiny commit/CL: one purpose, one coherent code unit, one verification target, and no hidden companion work. When the user's task is vague, broad, or multi-part, first turn it into an ordered atom list; only then implement exactly one atom, verify it, report it, and stop for review before starting any next atom.
 
 ## Non-negotiable atom contract
 
@@ -21,20 +21,38 @@ An atomic change has all of these properties:
 
 If a change cannot be made safe in one file, keep it atomic by semantic intent, not by file count. Example: a symbol rename across all references is one atomic semantic change. A parser behavior change plus renderer behavior change plus tests for both is not one atom; split it.
 
+## Task decomposition gate
+
+- Treat vague prompts, broad goals, bug reports without a named unit, and multi-part feature requests as **not ready to implement** until decomposed into atoms.
+- Before any code edit, identify the minimal atom sequence required to satisfy the request. Each atom must have a hat, unit, single outcome, and focused check.
+- If the first atom is unclear, inspect only the minimum code needed to define it. Do not use uncertainty as permission to batch work.
+- Implementation may start only after the current atom is named. Later atoms remain plan entries until their own approval gate is reached.
+- Do not collapse a large request into a "setup," "foundation," "wire everything," or "finish feature" atom. Split until every atom can be reviewed independently.
+
 ## Step protocol
 
 For every coding task:
 
-1. **Decompose first.** List the minimal sequence of atoms needed to satisfy the request. Order atoms by dependency and buildability.
-2. **Name the current atom.** Before editing, state it internally as: `Change <unit> so that <single outcome>; check <focused verification>`.
-3. **Read the exact unit and direct dependencies.** Do not inspect unrelated files hoping to find work.
-4. **Choose the hat.** Declare the atom as behavior, refactor, test-only, move-only, or mechanical migration. Do not switch hats inside the atom.
-5. **Add or update related tests with behavior.** When feasible, use red-green-refactor: write the next focused failing test, implement only enough code to pass it, then perform only local mechanical cleanup required to keep the behavior atom coherent. Schedule structural refactoring as a separate refactor atom.
-6. **Edit only that atom.** Touch the smallest range that changes the named unit. Do not batch nearby or unrelated improvements.
-7. **Verify immediately.** Run the narrowest relevant check: unit test, compiler diagnostic, type check, lint on touched file, or direct scenario.
-8. **Repair before proceeding.** If verification fails, fix the current atom before starting the next one.
-9. **Record the result.** Keep a short trail: atom completed, files touched, focused check outcome.
-10. **Proceed to the next atom.** Do not yield between atoms unless the user explicitly asked for one step only.
+1. **Decompose before implementing.** For vague, large, or multi-part prompts, list the minimal sequence of atoms needed to satisfy the request before any code edit. Order atoms by dependency and buildability.
+2. **Select exactly one current atom.** Work only on the first unapproved atom. Do not begin, pre-edit, or partially stage any later atom in the same response.
+3. **Name the current atom.** Before editing, state it internally as: `Change <unit> so that <single outcome>; check <focused verification>`.
+4. **Read the exact unit and direct dependencies.** Do not inspect unrelated files hoping to find work.
+5. **Choose the hat.** Declare the atom as behavior, refactor, test-only, move-only, or mechanical migration. Do not switch hats inside the atom.
+6. **Add or update related tests with behavior.** When feasible, use red-green-refactor: write the next focused failing test, implement only enough code to pass it, then perform only local mechanical cleanup required to keep the behavior atom coherent. Schedule structural refactoring as a separate refactor atom.
+7. **Edit only that atom.** Touch the smallest range that changes the named unit. Do not batch nearby or unrelated improvements.
+8. **Verify immediately.** Run the narrowest relevant check: unit test, compiler diagnostic, type check, lint on touched file, or direct scenario.
+9. **Repair before review.** If verification fails, fix the current atom before presenting it for review. Do not start another atom while repairing.
+10. **Report and stop for review.** Record the atom completed, files touched, focused check outcome, and any review risks. Then yield for human review.
+11. **Resume only after explicit approval.** Approval of the current atom is the only permission to start exactly one next atom. If review requests changes, repair the current atom and repeat the review gate.
+
+## Review gate
+
+- An agent may implement, verify, and report **one atom maximum** before yielding.
+- Passing tests, successful builds, silence, elapsed time, or confidence do not count as approval.
+- Approval must be explicit human approval in the current conversation, such as "approved," "continue," or "move to the next atom."
+- After approval, the agent may start exactly one next atom and must repeat the same stop-for-review gate.
+- If review feedback changes the atom's intent, stop and ask whether to replace the current atom or schedule a new atom.
+- Do not pre-apply future atoms, include "while here" edits, or continue just because the next atom is small, mechanical, or already planned.
 
 ## Two-hats rule: refactor vs behavior
 
