@@ -1,11 +1,11 @@
 ---
 name: atomic-coding-steps
-description: "Use when performing coding tasks where vague or large user requests must be decomposed into atomic, reviewable, bisectable changes before implementation, then implemented one atom at a time: one behavior, function, method, caller, test case, or cohesive code unit per step. Enforces per-atom verification, mandatory stop-for-review gates, related tests with behavior atoms, strict refactor-vs-feature separation, no unused APIs, move-only purity, and no drive-by edits."
+description: "Use only when the user explicitly asks to use atomic coding steps, atomic atoms, one-atom-at-a-time implementation, or this skill by name. Do not load for ordinary coding tasks unless the user's request directly asks for this workflow."
 ---
 
 # Atomic Coding Steps
 
-Use this skill to implement coding work as a sequence of small, reviewable, bisectable changes. Treat each atom like a tiny commit/CL: one purpose, one coherent code unit, one verification target, and no hidden companion work. When the user's task is vague, broad, or multi-part, first turn it into an ordered atom list; only then implement exactly one atom, verify it, report it, and stop for review before starting any next atom.
+Use this skill only when the user explicitly asks to use atomic coding steps, atomic atoms, one-atom-at-a-time implementation, or this skill by name. Do not load it for ordinary coding tasks by default. When invoked, implement coding work as a sequence of small, reviewable, bisectable changes. Treat each atom like a tiny commit/CL: one purpose, one coherent code unit, one verification target, and no hidden companion work. When the user's task is vague, broad, or multi-part, first turn it into an ordered atom list; only then implement exactly one atom, verify it, report it, and stop for review before starting any next atom.
 
 ## Non-negotiable atom contract
 
