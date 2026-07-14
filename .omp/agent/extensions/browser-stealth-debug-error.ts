@@ -4,10 +4,9 @@ import { postmortem } from "@oh-my-pi/pi-utils";
 const PATCH_STATE = Symbol.for("omp.extension.browserStealthDebugError.5296");
 const SOURCE_DEBUG_ERROR_FAILURE = /\bdebugError\b.*\bnot (?:a )?function\b/i;
 const BUNDLED_DEBUG_ERROR_FAILURE =
-	"P3 is not a function. (In 'P3(_)', 'P3' is undefined)";
+	/^([A-Za-z_$][\w$]*) is not a function\. \(In '\1\(_\)', '\1' is undefined\)$/;
 const BUNDLED_WORLD_ACQUIRE_FRAME =
-	"at #V (/$bunfs/root/packages/coding-agent/src/cli.js:339986:11)";
-
+	/\bat #V \(\/\$bunfs\/root\/packages\/coding-agent\/src\/cli\.js:\d+:\d+\)/;
 
 export function isBrowserStealthDebugError(reason: unknown): boolean {
 	if (
@@ -28,7 +27,7 @@ export function isBrowserStealthDebugError(reason: unknown): boolean {
 		reason.stack.includes("#doAcquireWorlds") &&
 		reason.stack.includes("FrameManager.js");
 	const bundledBuildFailure =
-		reason.message === BUNDLED_DEBUG_ERROR_FAILURE && reason.stack.includes(BUNDLED_WORLD_ACQUIRE_FRAME);
+		BUNDLED_DEBUG_ERROR_FAILURE.test(reason.message) && BUNDLED_WORLD_ACQUIRE_FRAME.test(reason.stack);
 
 	return sourceBuildFailure || bundledBuildFailure;
 }
