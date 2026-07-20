@@ -1,9 +1,15 @@
 return {
-  { "miikanissi/modus-themes.nvim" },
+  {
+    "ellisonleao/gruvbox.nvim",
+    opts = {
+      contrast = "hard",
+    },
+  },
+
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "modus_vivendi",
+      colorscheme = "gruvbox",
     },
   },
 }

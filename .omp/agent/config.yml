@@ -1,8 +1,8 @@
 symbolPreset: nerd
-theme:
-  dark: titanium
+theme: 
+  dark: dark-gruvbox
 setupVersion: 1
-modelRoles:
+modelRoles: 
   default: azure/gpt-5.6-sol
   smol: azure/gpt-5.6-luna
   slow: azure/gpt-5.6-sol:max
@@ -13,11 +13,10 @@ modelRoles:
   task: azure/gpt-5.6-sol
   advisor: azure/gpt-5.6-sol
   tiny: azure/gpt-5.6-luna:off
-browser:
+browser: 
   headless: true
 defaultThinkingLevel: auto
-dev:
-  autoqa:
-    consent: granted
-providers:
+dev: 
+  autoqaConsent: granted
+providers: 
   streamIdleTimeoutSeconds: 600
