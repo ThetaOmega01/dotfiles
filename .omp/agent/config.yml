@@ -16,7 +16,6 @@ modelRoles:
 browser:
   headless: true
 defaultThinkingLevel: auto
-hideThinkingBlock: true
 dev:
   autoqaConsent: granted
 providers:
