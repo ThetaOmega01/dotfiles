@@ -1,22 +1,23 @@
 symbolPreset: nerd
-theme: 
+theme:
   dark: dark-gruvbox
 setupVersion: 1
-modelRoles: 
-  default: azure/gpt-5.6-sol
-  smol: azure/gpt-5.6-luna
-  slow: azure/gpt-5.6-sol:max
-  vision: azure/gpt-5.6-sol
-  plan: azure/gpt-5.6-sol
-  designer: azure/gpt-5.6-sol
-  commit: azure/gpt-5.6-terra
-  task: azure/gpt-5.6-sol
-  advisor: azure/gpt-5.6-sol
-  tiny: azure/gpt-5.6-luna:off
-browser: 
+modelRoles:
+  default: openai/gpt-5.6-sol
+  smol: openai/gpt-5.6-luna
+  slow: openai/gpt-5.6-sol:max
+  vision: openai/gpt-5.6-sol
+  plan: openai/gpt-5.6-sol
+  designer: openai/gpt-5.6-sol
+  commit: openai/gpt-5.6-terra
+  task: openai/gpt-5.6-sol
+  advisor: openai/gpt-5.6-sol
+  tiny: openai/gpt-5.6-luna:off
+browser:
   headless: true
 defaultThinkingLevel: auto
-dev: 
+hideThinkingBlock: true
+dev:
   autoqaConsent: granted
-providers: 
+providers:
   streamIdleTimeoutSeconds: 600
