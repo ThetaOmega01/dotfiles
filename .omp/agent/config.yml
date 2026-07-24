@@ -12,7 +12,7 @@ modelRoles:
   commit: openai/gpt-5.6-terra
   task: openai/gpt-5.6-sol
   advisor: openai/gpt-5.6-sol
-  tiny: openai/gpt-5.3-codex-spark:medium
+  tiny: openai/codex-auto-review
 browser:
   headless: true
 defaultThinkingLevel: auto
