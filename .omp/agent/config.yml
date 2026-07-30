@@ -3,16 +3,16 @@ theme:
   dark: dark-gruvbox
 setupVersion: 1
 modelRoles:
-  default: openai/gpt-5.6-sol
-  smol: openai/gpt-5.6-luna
-  slow: openai/gpt-5.6-sol:max
-  vision: openai/gpt-5.6-sol
-  plan: openai/gpt-5.6-sol
-  designer: openai/gpt-5.6-sol
-  commit: openai/gpt-5.6-terra
-  task: openai/gpt-5.6-sol
-  advisor: openai/gpt-5.6-sol
-  tiny: openai/codex-auto-review
+  default: openai-codex/gpt-5.6-sol
+  smol: openai-codex/gpt-5.6-luna
+  slow: openai-codex/gpt-5.6-sol:max
+  vision: openai-codex/gpt-5.6-sol
+  plan: openai-codex/gpt-5.6-sol
+  designer: openai-codex/gpt-5.6-sol
+  commit: openai-codex/gpt-5.6-terra
+  task: openai-codex/gpt-5.6-sol
+  advisor: openai-codex/gpt-5.6-sol
+  tiny: openai-codex/codex-auto-review
 browser:
   headless: true
 defaultThinkingLevel: auto
