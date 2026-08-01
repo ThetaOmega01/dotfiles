@@ -21,3 +21,4 @@ dev:
   autoqaConsent: granted
 providers:
   streamIdleTimeoutSeconds: 600
+  openaiWebsockets: off
