@@ -15,7 +15,7 @@ modelRoles:
   tiny: openai-codex/codex-auto-review
 browser:
   headless: true
-defaultThinkingLevel: auto
+defaultThinkingLevel: med
 hideThinkingBlock: true
 dev:
   autoqaConsent: granted
