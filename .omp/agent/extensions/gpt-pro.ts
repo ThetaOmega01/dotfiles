@@ -17,14 +17,20 @@ export default function gptProExtension(pi: ExtensionAPI) {
 	pi.registerCommand("gpt-pro", {
 		description: "Toggle GPT-5.6 pro reasoning mode for Azure",
 		handler: async (_args, ctx) => {
+			if (proEnabled) {
+				proEnabled = false;
+				ctx.ui.notify("GPT pro reasoning mode disabled", "info");
+				return;
+			}
+
 			const model = ctx.models.current();
 			if (model?.provider !== AZURE_PROVIDER || !model.id.startsWith(GPT_56_MODEL_PREFIX)) {
 				ctx.ui.notify("/gpt-pro requires an Azure GPT-5.6 model", "warning");
 				return;
 			}
 
-			proEnabled = !proEnabled;
-			ctx.ui.notify(`GPT pro reasoning mode ${proEnabled ? "enabled" : "disabled"}`, "info");
+			proEnabled = true;
+			ctx.ui.notify("GPT pro reasoning mode enabled", "info");
 		},
 	});
 

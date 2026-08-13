@@ -32,3 +32,6 @@ task:
   eager: default
   batch: true
 hideThinkingBlock: true
+providers: 
+  streamIdleTimeoutSeconds: 1800
+  streamFirstEventTimeoutSeconds: 1800
