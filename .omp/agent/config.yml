@@ -1,8 +1,8 @@
 symbolPreset: nerd
-theme:
+theme: 
   dark: dark-gruvbox
 setupVersion: 1
-modelRoles:
+modelRoles: 
   default: openai-codex/gpt-5.6-sol
   smol: openai-codex/gpt-5.6-luna
   slow: openai-codex/gpt-5.6-sol:max
@@ -13,12 +13,20 @@ modelRoles:
   task: openai-codex/gpt-5.6-sol
   advisor: openai-codex/gpt-5.6-sol
   tiny: openai-codex/codex-auto-review
-browser:
+browser: 
   headless: true
 defaultThinkingLevel: med
 hideThinkingBlock: true
-dev:
+dev: 
   autoqaConsent: granted
-# providers:
-# streamIdleTimeoutSeconds: 600
-# openaiWebsockets: on
+textVerbosity: low
+bash: 
+  autoBackground: 
+    enabled: true
+astGrep: 
+  enabled: true
+github: 
+  enabled: true
+task: 
+  enableEffort: true
+  enableLsp: true
