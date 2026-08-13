@@ -15,8 +15,8 @@ modelRoles:
   tiny: openai-codex/codex-auto-review
 browser: 
   headless: true
-defaultThinkingLevel: med
-hideThinkingBlock: true
+defaultThinkingLevel: auto
+hideThinkingBlock: false
 dev: 
   autoqaConsent: granted
 textVerbosity: low
@@ -30,3 +30,5 @@ github:
 task: 
   enableEffort: true
   enableLsp: true
+  eager: preferred
+  batch: true
