@@ -31,3 +31,4 @@ task:
   enableLsp: true
   eager: default
   batch: true
+hideThinkingBlock: true
