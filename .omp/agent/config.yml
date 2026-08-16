@@ -35,3 +35,4 @@ hideThinkingBlock: true
 providers: 
   streamIdleTimeoutSeconds: 1800
   streamFirstEventTimeoutSeconds: 1800
+personality: default
