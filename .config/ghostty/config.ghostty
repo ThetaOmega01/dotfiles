@@ -1,3 +1,5 @@
 font-family = "Liga SFMono Nerd Font"
 theme = "Gruvbox Dark Hard"
 macos-option-as-alt = true
+window-width = 130
+window-height = 40
