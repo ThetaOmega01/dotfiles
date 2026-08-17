@@ -3,3 +3,4 @@ theme = "Gruvbox Dark Hard"
 macos-option-as-alt = true
 window-width = 130
 window-height = 40
+window-inherit-working-directory = false
