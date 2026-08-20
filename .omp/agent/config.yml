@@ -27,10 +27,11 @@ astGrep:
 github: 
   enabled: true
 task: 
-  enableEffort: true
+  enableEffort: false
   enableLsp: true
   eager: default
   batch: true
+  softRequestBudget: 90
 hideThinkingBlock: true
 providers: 
   streamIdleTimeoutSeconds: 1800
