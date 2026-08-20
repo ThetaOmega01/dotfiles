@@ -1,8 +1,8 @@
 symbolPreset: nerd
-theme:
-  dark: dark-gruvbox
+theme: 
+  dark: dark-gruvbox-no-icons
 setupVersion: 2
-modelRoles:
+modelRoles: 
   default: openai-codex/gpt-5.6-sol
   smol: openai-codex/gpt-5.6-luna
   slow: openai-codex/gpt-5.6-sol
@@ -13,36 +13,55 @@ modelRoles:
   task: openai-codex/gpt-5.6-sol
   advisor: openai-codex/gpt-5.6-sol
   tiny: openai-codex/codex-auto-review
-browser:
+browser: 
   headless: true
 defaultThinkingLevel: auto
-dev:
+dev: 
   autoqaConsent: granted
 textVerbosity: low
-bash:
-  autoBackground:
+bash: 
+  autoBackground: 
     enabled: true
-astGrep:
+astGrep: 
   enabled: true
-github:
+github: 
   enabled: true
-task:
+task: 
   enableEffort: false
   enableLsp: true
   eager: default
   batch: true
   softRequestBudget: 200
-providers:
+providers: 
   streamIdleTimeoutSeconds: -1
   streamFirstEventTimeoutSeconds: -1
 personality: default
-tui:
+tui: 
   tight: true
-display:
+display: 
   shimmer: disabled
   smoothStreaming: true
-startup:
+statusLine: 
+  preset: custom
+  separator: ascii
+  sessionAccent: true
+  leftSegments: 
+    - model
+    - mode
+    - collab
+    - path
+    - git
+    - pr
+  rightSegments: 
+    - session_name
+    - context_pct
+  segmentOptions: 
+    path: 
+      maxLength: 25
+      stripWorkPrefix: true
+      abbreviate: true
+startup: 
   quiet: true
 hideThinkingBlock: true
-composer:
-  shape: box
+composer: 
+  shape: pi
