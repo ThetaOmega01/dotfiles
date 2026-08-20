@@ -1,6 +1,6 @@
 symbolPreset: nerd
 theme: 
-  dark: dark-gruvbox
+  dark: dark-gruvbox-no-icons
 setupVersion: 1
 modelRoles: 
   default: openai-codex/gpt-5.6-sol
@@ -42,5 +42,23 @@ display:
   shimmer: disabled
   smoothStreaming: true
 statusLine: 
-  preset: ascii
+  preset: custom
+  separator: ascii
   sessionAccent: true
+  leftSegments: 
+    - model
+    - mode
+    - collab
+    - path
+    - git
+    - pr
+  rightSegments: 
+    - session_name
+    - context_pct
+  segmentOptions: 
+    path: 
+      maxLength: 25
+      stripWorkPrefix: true
+      abbreviate: true
+startup: 
+  quiet: true
