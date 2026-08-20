@@ -33,8 +33,8 @@ task:
   batch: true
   softRequestBudget: 200
 providers: 
-  streamIdleTimeoutSeconds: 1800
-  streamFirstEventTimeoutSeconds: 1800
+  streamIdleTimeoutSeconds: -1
+  streamFirstEventTimeoutSeconds: -1
 personality: default
 tui: 
   tight: true
