@@ -65,3 +65,5 @@ startup:
 hideThinkingBlock: true
 composer: 
   shape: pi
+edit: 
+  mode: sloppy
