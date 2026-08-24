@@ -1,6 +1,6 @@
 symbolPreset: nerd
 theme:
-  dark: dark-gruvbox-no-icons
+  dark: dark-gruvbox
 setupVersion: 2
 modelRoles:
   default: openai-codex/gpt-5.6-sol
