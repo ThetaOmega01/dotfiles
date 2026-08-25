@@ -9,17 +9,7 @@ if status is-interactive
     enable_transience
     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
     set fish_greeting ''
+    set -g fish_color_autosuggestion 928374
     fish_vi_key_bindings
     add_abbr
 end
-
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init2.fish 2>/dev/null || :
-
-# pnpm
-set -gx PNPM_HOME /Users/jt775/Library/pnpm
-if not string match -q -- "$PNPM_HOME/bin" $PATH
-    set -gx PATH "$PNPM_HOME/bin" $PATH
-end
-# pnpm end
