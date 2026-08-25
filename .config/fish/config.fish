@@ -6,7 +6,7 @@ if status is-interactive
     starship init fish | source
     zoxide init fish | source
     direnv hook fish | source
-
+    enable_transience
     alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
     set fish_greeting ''
     fish_vi_key_bindings
@@ -18,8 +18,8 @@ end
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
 # pnpm
-set -gx PNPM_HOME "/Users/jt775/Library/pnpm"
+set -gx PNPM_HOME /Users/jt775/Library/pnpm
 if not string match -q -- "$PNPM_HOME/bin" $PATH
-  set -gx PATH "$PNPM_HOME/bin" $PATH
+    set -gx PATH "$PNPM_HOME/bin" $PATH
 end
 # pnpm end
