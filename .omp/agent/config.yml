@@ -35,28 +35,6 @@ task:
 personality: default
 tui:
   tight: true
-display:
-  shimmer: disabled
-  smoothStreaming: true
-statusLine:
-  preset: custom
-  separator: ascii
-  sessionAccent: true
-  leftSegments:
-    - model
-    - mode
-    - collab
-    - path
-    - git
-    - pr
-  rightSegments:
-    - session_name
-    - context_pct
-  segmentOptions:
-    path:
-      maxLength: 25
-      stripWorkPrefix: true
-      abbreviate: true
 startup:
   quiet: true
 hideThinkingBlock: true
