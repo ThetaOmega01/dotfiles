@@ -42,3 +42,4 @@ composer:
 edit:
   autoRepair:
     enabled: true
+hideThinkingBlock: true
