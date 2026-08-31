@@ -39,7 +39,7 @@ startup:
   quiet: true
 hideThinkingBlock: true
 composer:
-  shape: pi
+  shape: claude
 edit:
   autoRepair:
     enabled: true
