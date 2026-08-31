@@ -37,7 +37,6 @@ tui:
   tight: true
 startup:
   quiet: true
-hideThinkingBlock: true
 composer:
   shape: claude
 edit:
