@@ -1,6 +1,5 @@
 local core = require("snippetlib.core")
 
-local s = core.s
 local t = core.t
 local i = core.i
 local f = core.f

@@ -6,7 +6,6 @@ local matrix = require("snippetlib.matrix")
 local s = core.s
 local t = core.t
 local i = core.i
-local rep = core.rep
 
 local in_mathzone = conditions.tex_mathzone
 
