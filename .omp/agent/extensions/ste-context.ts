@@ -17,7 +17,7 @@ export default function steContextExtension(pi: ExtensionAPI) {
 		description: "Turn the STE language reminder on or off",
 		handler: async (_args, ctx) => {
 			steEnabled = !steEnabled;
-			ctx.ui.notify(`STE language reminder ${steEnabled ? "enabled" : "disabled"}`, "info");
+			ctx.ui.notify(`STE is ${steEnabled ? "on" : "off"}`, "info");
 		},
 	});
 
