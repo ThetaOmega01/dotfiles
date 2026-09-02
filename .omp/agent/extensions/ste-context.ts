@@ -4,7 +4,7 @@ import type { UserMessage } from "@oh-my-pi/pi-ai";
 const STE_REMINDER: UserMessage = {
 	role: "user",
 	content:
-		"LANGUAGE-ONLY REQUIREMENT FOR THE NEXT REPLY: Preserve all required content, evidence, technical detail, decisions, actions, and rigor. Do not omit, weaken, or simplify the task substance. Apply ASD-STE100 Simplified Technical English only to the prose. Use short, direct sentences and simple words. Use one term for one meaning. Do not use idioms, metaphors, filler, or decorative language. Keep exact technical text unchanged. Before sending, check and correct all prose against these rules.",
+		"NEXT REPLY—LANGUAGE ONLY. Keep all required content, evidence, technical detail, decisions, actions, and rigor. Omit, weaken, or simplify none. Apply ASD-STE100 Simplified Technical English to prose only: short, direct sentences; simple words; one term per meaning; no idioms, metaphors, filler, or decorative language. Keep exact technical text unchanged. Before sending, check all prose against these rules; correct violations.",
 	synthetic: true,
 	attribution: "agent",
 	timestamp: 0,
