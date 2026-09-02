@@ -41,9 +41,6 @@ export default function steContextExtension(pi: ExtensionAPI) {
 	});
 
 	pi.on("context", (event) => {
-		if (!steEnabled) return;
-
-		event.messages.push(STE_REMINDER);
-		return { messages: event.messages };
+		if (steEnabled) return { messages: [...event.messages, STE_REMINDER] };
 	});
 }
