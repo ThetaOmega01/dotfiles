@@ -3,7 +3,7 @@ theme:
   dark: dark-gruvbox
 setupVersion: 2
 modelRoles:
-  default: openai-codex/gpt-6-astra
+  default: openai-codex/gpt-6-astra:med
   smol: openai-codex/gpt-5.6-luna:med
   slow: openai-codex/gpt-6-astra:max
   vision: openai-codex/gpt-6-astra
