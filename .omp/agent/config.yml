@@ -32,14 +32,6 @@ task:
   eager: default
   batch: true
   softRequestBudget: 200
-personality: default
-tui:
-  tight: true
-startup:
-  quiet: true
-composer:
-  shape: claude
 edit:
   autoRepair:
     enabled: true
-hideThinkingBlock: true
