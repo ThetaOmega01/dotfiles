@@ -37,4 +37,4 @@ edit:
     enabled: true
 providers:
   openai-codex:
-    codeMode: auto
+    codeMode: "on"
