@@ -3,7 +3,7 @@ theme:
   dark: dark-gruvbox
 setupVersion: 2
 modelRoles:
-  default: openai-codex/gpt-6.1-sol
+  default: anthropic/claude-opus-5-5
   smol: azure/DeepSeek-V4.1-Flash
   slow: openai-codex/gpt-6-astra:max
   vision: openai-codex/gpt-6-astra
