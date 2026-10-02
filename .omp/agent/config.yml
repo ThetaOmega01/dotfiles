@@ -9,7 +9,7 @@ modelRoles:
   vision: openai-codex/gpt-6-astra
   plan: openai-codex/gpt-6-astra
   designer: openai-codex/gpt-6-astra
-  commit: azure/gpt-6-luna
+  commit: openai-codex/gpt-6-luna
   task: anthropic/claude-opus-5-5
   advisor: openai-codex/gpt-6-astra
   tiny: openai-codex/codex-auto-review
@@ -32,6 +32,7 @@ task:
   eager: default
   batch: true
   softRequestBudget: 200
+  maxEffort: xhigh
 edit:
   autoRepair:
     enabled: true
