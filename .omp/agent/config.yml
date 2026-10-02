@@ -3,13 +3,13 @@ theme:
   dark: dark-gruvbox
 setupVersion: 2
 modelRoles:
-  default: openai-codex/gpt-6.1-sol:high
-  smol: openai-codex/gpt-5.6-luna:med
+  default: openai-codex/gpt-6.1-sol
+  smol: azure/DeepSeek-V4.1-Flash
   slow: openai-codex/gpt-6-astra:max
   vision: openai-codex/gpt-6-astra
   plan: openai-codex/gpt-6-astra
   designer: openai-codex/gpt-6-astra
-  commit: openai-codex/gpt-5.6-luna
+  commit: azure/gpt-6-luna
   task: anthropic/claude-opus-5-5
   advisor: openai-codex/gpt-6-astra
   tiny: openai-codex/codex-auto-review
