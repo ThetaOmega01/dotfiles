@@ -1,17 +1,15 @@
 symbolPreset: nerd
-theme:
-  dark: dark-gruvbox
 setupVersion: 2
 modelRoles:
-  default: anthropic/claude-opus-5-5
-  smol: azure/DeepSeek-V4.1-Flash
-  slow: openai-codex/gpt-6-astra:max
-  vision: openai-codex/gpt-6-astra
-  plan: openai-codex/gpt-6-astra
-  designer: openai-codex/gpt-6-astra
-  commit: openai-codex/gpt-6-luna
+  default: anthropic/claude-opus-5-5:med
+  smol: openai-codex/gpt-6.2-sol:med
+  slow: openai-codex/gpt-6.2-astra:max
+  vision: openai-codex/gpt-6.2-astra
+  plan: openai-codex/gpt-6.2-astra
+  designer: openai-codex/gpt-6.2-astra
+  commit: openai-codex/gpt-6.1-terra
   task: anthropic/claude-opus-5-5
-  advisor: openai-codex/gpt-6-astra
+  advisor: openai-codex/gpt-6.2-astra:max
   tiny: openai-codex/codex-auto-review
 browser:
   headless: true
@@ -36,6 +34,3 @@ task:
 edit:
   autoRepair:
     enabled: true
-providers:
-  openai-codex:
-    codeMode: "on"
