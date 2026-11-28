@@ -1,5 +1,5 @@
 symbolPreset: nerd
-setupVersion: 2
+setupVersion: 3
 modelRoles:
   default: anthropic/claude-opus-5-5:med
   smol: openai-codex/gpt-6.2-sol:med
@@ -13,6 +13,7 @@ modelRoles:
   tiny: openai-codex/codex-auto-review
 browser:
   headless: true
+  relay: true
 defaultThinkingLevel: high
 dev:
   autoqaConsent: granted
