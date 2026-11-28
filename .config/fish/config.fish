@@ -2,7 +2,7 @@ set --global --export LANG en_US.UTF-8
 
 if status is-interactive
     set --global fish_greeting
-    set --global fish_color_autosuggestion 928374
+    set --global fish_color_autosuggestion 989898
     set --global fish_key_bindings fish_vi_key_bindings
 
     if command --query starship

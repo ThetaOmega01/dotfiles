@@ -17,6 +17,8 @@ defaultThinkingLevel: high
 dev:
   autoqaConsent: granted
 textVerbosity: low
+theme:
+  dark: modus-vivendi
 bash:
   autoBackground:
     enabled: true
