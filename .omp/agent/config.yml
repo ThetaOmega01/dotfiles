@@ -37,3 +37,5 @@ task:
 edit:
   autoRepair:
     enabled: true
+composer:
+  tokenRate: true
