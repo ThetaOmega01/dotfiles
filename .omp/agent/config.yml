@@ -39,3 +39,4 @@ edit:
     enabled: true
 composer:
   tokenRate: true
+hideThinkingBlock: true
